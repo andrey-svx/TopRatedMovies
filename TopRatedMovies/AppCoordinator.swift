@@ -15,7 +15,6 @@ final class AppCoordinator: Coordinator {
         self.window = window
         
         let navigationController = UINavigationController()
-        navigationController.isNavigationBarHidden = true
         super.init(navigationController)
     }
     
@@ -23,7 +22,8 @@ final class AppCoordinator: Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        let viewController = ViewController()
-        navigationController.viewControllers = [viewController]
+        let moviesCoordinator = MoviesCoordinator(navigationController)
+        retain(moviesCoordinator)
+        moviesCoordinator.start()
     }
 }

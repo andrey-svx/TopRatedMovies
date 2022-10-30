@@ -7,12 +7,13 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class TopRatedMoviesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        navigationItem.title = "\(Self.self)"
     }
 
 
