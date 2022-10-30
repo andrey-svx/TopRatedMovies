@@ -5,7 +5,7 @@
 //  Created by Андрей Исаев on 30.10.2022.
 //
 
-import UIKit
+import UIKit.UINavigationController
 
 protocol Completable {
     
@@ -38,5 +38,5 @@ open class Coordinator: NSObject {
         childCoordinators.removeAll()
     }
     
-    func start(_ releaser: @escaping () -> Void = { }) { }
+    func start() { }
 }
