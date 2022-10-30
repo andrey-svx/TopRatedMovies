@@ -22,9 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         
-        self.window = UIWindow(windowScene: windowScene)
-        self.appCoordinator = AppCoordinator(window)
-        self.appCoordinator?.start()
+        window = UIWindow(windowScene: windowScene)
+        appCoordinator = AppCoordinator(window)
+        appCoordinator?.start()
     }
 }
 

@@ -20,10 +20,10 @@ final class AppCoordinator: Coordinator {
     }
     
     override func start() {
-        self.window?.rootViewController = self.navigationController
-        self.window?.makeKeyAndVisible()
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
         
         let viewController = ViewController()
-        self.navigationController.viewControllers = [viewController]
+        navigationController.viewControllers = [viewController]
     }
 }
