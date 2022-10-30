@@ -14,6 +14,7 @@
 		317A55C9290E62D5007F1C31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 317A55C8290E62D5007F1C31 /* Assets.xcassets */; };
 		317A55CC290E62D5007F1C31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 317A55CA290E62D5007F1C31 /* LaunchScreen.storyboard */; };
 		318A8427290E67AA00A9B0D1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318A8426290E67AA00A9B0D1 /* Coordinator.swift */; };
+		318A842A290EFEDE00A9B0D1 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 318A8429290EFEDE00A9B0D1 /* Swinject */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				318A842A290EFEDE00A9B0D1 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +88,9 @@
 			dependencies = (
 			);
 			name = TopRatedMovies;
+			packageProductDependencies = (
+				318A8429290EFEDE00A9B0D1 /* Swinject */,
+			);
 			productName = TopRatedMovies;
 			productReference = 317A55BC290E62D3007F1C31 /* TopRatedMovies.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +119,9 @@
 				Base,
 			);
 			mainGroup = 317A55B3290E62D3007F1C31;
+			packageReferences = (
+				318A8428290EFEDE00A9B0D1 /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			productRefGroup = 317A55BD290E62D3007F1C31 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -368,6 +376,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		318A8428290EFEDE00A9B0D1 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		318A8429290EFEDE00A9B0D1 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 318A8428290EFEDE00A9B0D1 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 317A55B4290E62D3007F1C31 /* Project object */;
 }
