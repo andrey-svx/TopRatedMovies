@@ -15,15 +15,15 @@ final class AppCoordinator: Coordinator {
         self.window = window
         
         let navigationController = UINavigationController()
-        navigationController.isNavigationBarHidden = true
         super.init(navigationController)
     }
     
     override func start() {
-        self.window?.rootViewController = self.navigationController
-        self.window?.makeKeyAndVisible()
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
         
-        let viewController = ViewController()
-        self.navigationController.viewControllers = [viewController]
+        let moviesCoordinator = MoviesCoordinator(navigationController)
+        retain(moviesCoordinator)
+        moviesCoordinator.start()
     }
 }
