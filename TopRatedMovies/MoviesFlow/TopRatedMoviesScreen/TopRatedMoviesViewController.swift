@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class TopRatedMoviesViewController: UIViewController {
     
@@ -17,7 +19,20 @@ final class TopRatedMoviesViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-
+    
+    private let viewModel: TopRatedMoviesViewModel
+    
+    private let disposeBag = DisposeBag()
+    
+    init(viewModel: TopRatedMoviesViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,8 +40,6 @@ final class TopRatedMoviesViewController: UIViewController {
             TopRatedMoviesCell.self,
             forCellWithReuseIdentifier: TopRatedMoviesCell.identifier
         )
-        
-        collectionView.dataSource = self
         
         view.backgroundColor = .white
         navigationItem.title = "Top Rated Movies"
@@ -38,23 +51,26 @@ final class TopRatedMoviesViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        let input = TopRatedMoviesViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asSignal()
+        )
+        let output = viewModel.transform(
+            input
+        )
+        output.items
+            .drive(collectionView.rx.items) { (collectionView, row, element) in
+                let indexPath = IndexPath(row: row, section: 0)
+                let cell: TopRatedMoviesCell = collectionView.dequeueReusableCell(for: indexPath)
+                return cell
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
-    }
-}
-
-extension TopRatedMoviesViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        25
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopRatedMoviesCell.identifier, for: indexPath) as! TopRatedMoviesCell
-        return cell
     }
 }
 

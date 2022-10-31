@@ -11,7 +11,8 @@ import UIKit
 final class MoviesCoordinator: Coordinator {
     
     override func start() {
-        let topRatedMoviesViewController = TopRatedMoviesViewController()
+        let viewModel = TopRatedMoviesViewModel()
+        let topRatedMoviesViewController = TopRatedMoviesViewController(viewModel: viewModel)
         navigationController.viewControllers = [topRatedMoviesViewController]
     }
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */; };
 		3143510229103CB000A311E2 /* TopRatedMoviesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3143510129103CB000A311E2 /* TopRatedMoviesCell.swift */; };
+		314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314351032910446B00A311E2 /* UIViewController+Rx.swift */; };
+		314351072910470D00A311E2 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314351062910470D00A311E2 /* UICollectionView.swift */; };
 		317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55BF290E62D3007F1C31 /* AppDelegate.swift */; };
 		317A55C2290E62D3007F1C31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55C1290E62D3007F1C31 /* SceneDelegate.swift */; };
 		317A55C4290E62D3007F1C31 /* TopRatedMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55C3290E62D3007F1C31 /* TopRatedMoviesViewController.swift */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesViewModel.swift; sourceTree = "<group>"; };
 		3143510129103CB000A311E2 /* TopRatedMoviesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesCell.swift; sourceTree = "<group>"; };
+		314351032910446B00A311E2 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		314351062910470D00A311E2 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		317A55BC290E62D3007F1C31 /* TopRatedMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopRatedMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		317A55BF290E62D3007F1C31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		317A55C1290E62D3007F1C31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +69,15 @@
 			path = TopRatedMoviesScreen;
 			sourceTree = "<group>";
 		};
+		31435105291045B600A311E2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				314351032910446B00A311E2 /* UIViewController+Rx.swift */,
+				314351062910470D00A311E2 /* UICollectionView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		317A55B3290E62D3007F1C31 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +102,7 @@
 				318A8426290E67AA00A9B0D1 /* Coordinator.swift */,
 				318A842B290F01AE00A9B0D1 /* AppCoordinator.swift */,
 				318A8436290F0A1100A9B0D1 /* MoviesFlow */,
+				31435105291045B600A311E2 /* Extensions */,
 				317A55C5290E62D3007F1C31 /* Main.storyboard */,
 				317A55C8290E62D5007F1C31 /* Assets.xcassets */,
 				317A55CA290E62D5007F1C31 /* LaunchScreen.storyboard */,
@@ -187,10 +201,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314351072910470D00A311E2 /* UICollectionView.swift in Sources */,
 				318A8427290E67AA00A9B0D1 /* Coordinator.swift in Sources */,
 				3143510229103CB000A311E2 /* TopRatedMoviesCell.swift in Sources */,
 				317A55C4290E62D3007F1C31 /* TopRatedMoviesViewController.swift in Sources */,
 				318A842C290F01AE00A9B0D1 /* AppCoordinator.swift in Sources */,
+				314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */,
 				318A8435290F0A0300A9B0D1 /* MoviesCoordinator.swift in Sources */,
 				317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */,
 				3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */,

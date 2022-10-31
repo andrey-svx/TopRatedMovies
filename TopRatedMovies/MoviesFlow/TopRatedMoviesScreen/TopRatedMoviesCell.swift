@@ -9,6 +9,10 @@ import UIKit
 
 final class TopRatedMoviesCell: UICollectionViewCell {
     
+    struct Model {
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -20,6 +24,4 @@ final class TopRatedMoviesCell: UICollectionViewCell {
     }
 }
 
-extension TopRatedMoviesCell {
-    static var identifier: String { "\(Self.self)" }
-}
+extension TopRatedMoviesCell: ReuseIdentifiable { }
