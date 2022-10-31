@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Swinject
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    private let assembler = Assembler([AppFlowAssembly()])
     
     private var appCoordinator: AppCoordinator?
 
@@ -23,7 +26,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         window = UIWindow(windowScene: windowScene)
-        appCoordinator = AppCoordinator(window)
+        appCoordinator = assembler.resolver.resolve(
+            AppCoordinator.self,
+            argument: window
+        )
         appCoordinator?.start()
     }
 }

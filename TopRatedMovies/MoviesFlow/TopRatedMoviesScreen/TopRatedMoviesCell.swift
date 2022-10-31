@@ -9,9 +9,7 @@ import UIKit
 
 final class TopRatedMoviesCell: UICollectionViewCell {
     
-    struct Model {
-        
-    }
+    struct Model { }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
