@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */; };
 		317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55BF290E62D3007F1C31 /* AppDelegate.swift */; };
 		317A55C2290E62D3007F1C31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55C1290E62D3007F1C31 /* SceneDelegate.swift */; };
 		317A55C4290E62D3007F1C31 /* TopRatedMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55C3290E62D3007F1C31 /* TopRatedMoviesViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesViewModel.swift; sourceTree = "<group>"; };
 		317A55BC290E62D3007F1C31 /* TopRatedMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopRatedMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		317A55BF290E62D3007F1C31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		317A55C1290E62D3007F1C31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		314350FE29103A1600A311E2 /* TopRatedMoviesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				317A55C3290E62D3007F1C31 /* TopRatedMoviesViewController.swift */,
+				314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */,
+			);
+			path = TopRatedMoviesScreen;
+			sourceTree = "<group>";
+		};
 		317A55B3290E62D3007F1C31 = {
 			isa = PBXGroup;
 			children = (
@@ -87,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				318A8434290F0A0300A9B0D1 /* MoviesCoordinator.swift */,
-				317A55C3290E62D3007F1C31 /* TopRatedMoviesViewController.swift */,
+				314350FE29103A1600A311E2 /* TopRatedMoviesScreen */,
 			);
 			path = MoviesFlow;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 				318A842C290F01AE00A9B0D1 /* AppCoordinator.swift in Sources */,
 				318A8435290F0A0300A9B0D1 /* MoviesCoordinator.swift in Sources */,
 				317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */,
+				3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */,
 				317A55C2290E62D3007F1C31 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
