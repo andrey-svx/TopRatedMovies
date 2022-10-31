@@ -25,7 +25,10 @@ final class AppCoordinator: Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        let moviesCoordinator = MoviesCoordinator(navigationController)
+        let moviesCoordinator = resolver.resolve(
+            MoviesCoordinator.self,
+            argument: navigationController
+        )!
         retain(moviesCoordinator)
         moviesCoordinator.start()
     }

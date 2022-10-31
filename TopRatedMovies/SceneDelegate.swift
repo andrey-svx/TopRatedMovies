@@ -12,7 +12,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    private let assembler = Assembler([AppFlowAssembly()])
+    private let assembler = Assembler([
+        AppFlowAssembly(),
+        MoviesFlowAssembly()
+    ])
     
     private var appCoordinator: AppCoordinator?
 

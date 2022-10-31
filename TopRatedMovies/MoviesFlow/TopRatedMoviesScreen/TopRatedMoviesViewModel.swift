@@ -5,7 +5,6 @@
 //  Created by Андрей Исаев on 31.10.2022.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
 
@@ -32,7 +31,7 @@ final class TopRatedMoviesViewModel {
         let items = viewWillAppear
             .delay(.seconds(2), scheduler: MainScheduler.instance)
             .map { _ -> [TopRatedMoviesCell.Model] in
-                (0...24).map { _ in .init() }
+                (0...10).map { _ in .init() }
             }
             .asObservable()
             .share()

@@ -12,6 +12,7 @@
 		314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314351032910446B00A311E2 /* UIViewController+Rx.swift */; };
 		314351072910470D00A311E2 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314351062910470D00A311E2 /* UICollectionView.swift */; };
 		3143510B291061A500A311E2 /* AppFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3143510A291061A400A311E2 /* AppFlowAssembly.swift */; };
+		3143510F2910648B00A311E2 /* MoviesFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3143510E2910648B00A311E2 /* MoviesFlowAssembly.swift */; };
 		317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55BF290E62D3007F1C31 /* AppDelegate.swift */; };
 		317A55C2290E62D3007F1C31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55C1290E62D3007F1C31 /* SceneDelegate.swift */; };
 		317A55C4290E62D3007F1C31 /* TopRatedMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A55C3290E62D3007F1C31 /* TopRatedMoviesViewController.swift */; };
@@ -33,6 +34,7 @@
 		314351032910446B00A311E2 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		314351062910470D00A311E2 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		3143510A291061A400A311E2 /* AppFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowAssembly.swift; sourceTree = "<group>"; };
+		3143510E2910648B00A311E2 /* MoviesFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesFlowAssembly.swift; sourceTree = "<group>"; };
 		317A55BC290E62D3007F1C31 /* TopRatedMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopRatedMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		317A55BF290E62D3007F1C31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		317A55C1290E62D3007F1C31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,15 @@
 			path = Uitilities;
 			sourceTree = "<group>";
 		};
+		3143510D2910641100A311E2 /* AppFlow */ = {
+			isa = PBXGroup;
+			children = (
+				318A842B290F01AE00A9B0D1 /* AppCoordinator.swift */,
+				3143510A291061A400A311E2 /* AppFlowAssembly.swift */,
+			);
+			path = AppFlow;
+			sourceTree = "<group>";
+		};
 		317A55B3290E62D3007F1C31 = {
 			isa = PBXGroup;
 			children = (
@@ -109,8 +120,7 @@
 			children = (
 				317A55BF290E62D3007F1C31 /* AppDelegate.swift */,
 				317A55C1290E62D3007F1C31 /* SceneDelegate.swift */,
-				318A842B290F01AE00A9B0D1 /* AppCoordinator.swift */,
-				3143510A291061A400A311E2 /* AppFlowAssembly.swift */,
+				3143510D2910641100A311E2 /* AppFlow */,
 				318A8436290F0A1100A9B0D1 /* MoviesFlow */,
 				3143510C2910623300A311E2 /* Uitilities */,
 				31435105291045B600A311E2 /* Extensions */,
@@ -126,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				318A8434290F0A0300A9B0D1 /* MoviesCoordinator.swift */,
+				3143510E2910648B00A311E2 /* MoviesFlowAssembly.swift */,
 				314350FE29103A1600A311E2 /* TopRatedMoviesScreen */,
 			);
 			path = MoviesFlow;
@@ -218,6 +229,7 @@
 				317A55C4290E62D3007F1C31 /* TopRatedMoviesViewController.swift in Sources */,
 				318A842C290F01AE00A9B0D1 /* AppCoordinator.swift in Sources */,
 				3143510B291061A500A311E2 /* AppFlowAssembly.swift in Sources */,
+				3143510F2910648B00A311E2 /* MoviesFlowAssembly.swift in Sources */,
 				314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */,
 				318A8435290F0A0300A9B0D1 /* MoviesCoordinator.swift in Sources */,
 				317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */,

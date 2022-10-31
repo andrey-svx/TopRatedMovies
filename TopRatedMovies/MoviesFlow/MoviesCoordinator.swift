@@ -6,13 +6,19 @@
 //
 
 import UIKit
-
+import Swinject
 
 final class MoviesCoordinator: Coordinator {
     
+    private let resolver: Resolver
+    
+    init(_ navigationController: UINavigationController, resolver: Resolver) {
+        self.resolver = resolver
+        super.init(navigationController)
+    }
+    
     override func start() {
-        let viewModel = TopRatedMoviesViewModel()
-        let topRatedMoviesViewController = TopRatedMoviesViewController(viewModel: viewModel)
-        navigationController.viewControllers = [topRatedMoviesViewController]
+        let viewController = resolver.resolve(TopRatedMoviesViewController.self)!
+        navigationController.viewControllers = [viewController]
     }
 }
