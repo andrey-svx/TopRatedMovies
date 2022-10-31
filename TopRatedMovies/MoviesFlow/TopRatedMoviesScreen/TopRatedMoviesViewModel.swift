@@ -19,15 +19,31 @@ final class TopRatedMoviesViewModel {
     
     struct Output {
         
+        let isLoading: Driver<Bool>
         let items: Driver<[TopRatedMoviesCell.Model]>
         let refreshReleased: Driver<Bool>
     }
     
     func transform(_ input: Input) -> Output {
-        let items = input.viewWillAppear
+        let viewWillAppear = input.viewWillAppear
+            .asObservable()
+            .share()
+        
+        let items = viewWillAppear
+            .delay(.seconds(2), scheduler: MainScheduler.instance)
             .map { _ -> [TopRatedMoviesCell.Model] in
-                [.init(), .init(), .init(), .init(), .init()]
+                (0...24).map { _ in .init() }
             }
+            .asObservable()
+            .share()
+        
+        let isLoading = Observable.merge(
+            viewWillAppear.map { _ in true },
+            items.map { _ in false }
+        )
+        .asDriver(onErrorJustReturn: false)
+        
+        let itemsDriver = items
             .asDriver(onErrorJustReturn: [])
         
         let refreshReleased = input.refreshPulled
@@ -36,7 +52,8 @@ final class TopRatedMoviesViewModel {
             .asDriver(onErrorJustReturn: false)
         
         return Output(
-            items: items,
+            isLoading: isLoading,
+            items: itemsDriver,
             refreshReleased: refreshReleased
         )
     }

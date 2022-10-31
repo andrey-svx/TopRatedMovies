@@ -16,4 +16,35 @@ extension Reactive where Base: UIViewController {
             .map { _ in () }
         return ControlEvent(events: source)
     }
+    
+    var isLoading: Binder<Bool> {
+        Binder(self.base) { viewController, value in
+            value
+            ? viewController.startBusyAnimation()
+            : viewController.stopBusyAnimation()
+        }
+    }
+}
+
+fileprivate extension UIViewController {
+    
+    func startBusyAnimation() {
+        let fader = UIView(frame: view.bounds)
+        fader.tag = 1000
+        fader.backgroundColor = .black
+        fader.alpha = 0.15
+        view.addSubview(fader)
+
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.tag = 1001
+        spinner.startAnimating()
+        spinner.center = view.center
+        view.addSubview(spinner)
+    }
+
+    func stopBusyAnimation() {
+        view.subviews
+            .filter { $0.tag == 1000 || $0.tag == 1001 }
+            .forEach { $0.removeFromSuperview() }
+    }
 }

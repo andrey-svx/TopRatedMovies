@@ -76,6 +76,11 @@ final class TopRatedMoviesViewController: UIViewController {
         let output = viewModel.transform(
             input
         )
+        
+        output.isLoading
+            .drive(self.rx.isLoading)
+            .disposed(by: disposeBag)
+        
         output.items
             .drive(collectionView.rx.items) { (collectionView, row, element) in
                 let indexPath = IndexPath(row: row, section: 0)
@@ -83,6 +88,7 @@ final class TopRatedMoviesViewController: UIViewController {
                 return cell
             }
             .disposed(by: disposeBag)
+        
         output.refreshReleased
             .drive(refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
