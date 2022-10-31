@@ -36,22 +36,33 @@ final class TopRatedMoviesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(
-            TopRatedMoviesCell.self,
-            forCellWithReuseIdentifier: TopRatedMoviesCell.identifier
-        )
-        
+        setupCollectionView()
+        configureSubviews()
+        configureAutoLayout()
+        bindViewModel()
+    }
+    
+    private func setupCollectionView() {
+        collectionView.register(TopRatedMoviesCell.self)
+    }
+    
+    private func configureSubviews() {
         view.backgroundColor = .white
         navigationItem.title = "Top Rated Movies"
         
         view.addSubview(collectionView)
+    }
+    
+    private func configureAutoLayout() {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
+    }
+    
+    private func bindViewModel() {
         let input = TopRatedMoviesViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asSignal()
         )
@@ -65,12 +76,6 @@ final class TopRatedMoviesViewController: UIViewController {
                 return cell
             }
             .disposed(by: disposeBag)
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView.reloadData()
     }
 }
 
