@@ -11,11 +11,17 @@ import RxCocoa
 
 final class TopRatedMoviesViewController: UIViewController {
     
-    private let collectionView: UICollectionView = {
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        return refreshControl
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: UICollectionViewCompositionalLayout.tiles()
         )
+        collectionView.refreshControl = self.refreshControl
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -64,7 +70,8 @@ final class TopRatedMoviesViewController: UIViewController {
     
     private func bindViewModel() {
         let input = TopRatedMoviesViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asSignal()
+            viewWillAppear: self.rx.viewWillAppear.asSignal(),
+            refreshPulled: refreshControl.rx.controlEvent(.valueChanged).asSignal()
         )
         let output = viewModel.transform(
             input
@@ -75,6 +82,9 @@ final class TopRatedMoviesViewController: UIViewController {
                 let cell: TopRatedMoviesCell = collectionView.dequeueReusableCell(for: indexPath)
                 return cell
             }
+            .disposed(by: disposeBag)
+        output.refreshReleased
+            .drive(refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
     }
 }

@@ -14,11 +14,13 @@ final class TopRatedMoviesViewModel {
     struct Input {
         
         let viewWillAppear: Signal<Void>
+        let refreshPulled: Signal<Void>
     }
     
     struct Output {
         
         let items: Driver<[TopRatedMoviesCell.Model]>
+        let refreshReleased: Driver<Bool>
     }
     
     func transform(_ input: Input) -> Output {
@@ -28,6 +30,14 @@ final class TopRatedMoviesViewModel {
             }
             .asDriver(onErrorJustReturn: [])
         
-        return Output(items: items)
+        let refreshReleased = input.refreshPulled
+            .delay(.seconds(1))
+            .map { _ in false }
+            .asDriver(onErrorJustReturn: false)
+        
+        return Output(
+            items: items,
+            refreshReleased: refreshReleased
+        )
     }
 }
