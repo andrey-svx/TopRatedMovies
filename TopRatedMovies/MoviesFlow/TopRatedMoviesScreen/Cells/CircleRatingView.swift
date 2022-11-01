@@ -17,6 +17,7 @@ final class CircleRatingView: UIView {
     
     private let ratingLabel: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 16.0, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

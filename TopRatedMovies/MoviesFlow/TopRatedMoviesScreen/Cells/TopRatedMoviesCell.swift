@@ -42,12 +42,17 @@ final class TopRatedMoviesCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: 18.0, weight: .medium)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
     private let yearLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 1
+        label.font = .systemFont(ofSize: 16.0, weight: .regular)
+        label.textColor = .gray
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
@@ -69,7 +74,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
             labelsStack
         ])
         stack.axis = .vertical
-        stack.spacing = 32.0
+        stack.spacing = 28.0
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         return stack
