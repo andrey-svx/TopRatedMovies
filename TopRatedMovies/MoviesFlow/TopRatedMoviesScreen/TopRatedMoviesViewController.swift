@@ -11,7 +11,7 @@ import RxCocoa
 
 final class TopRatedMoviesViewController: UIViewController {
     
-    private lazy var refreshControl: UIRefreshControl = {
+    private let refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         return refreshControl
     }()
@@ -44,7 +44,7 @@ final class TopRatedMoviesViewController: UIViewController {
         
         setupCollectionView()
         configureSubviews()
-        configureAutoLayout()
+        configureLayout()
         bindViewModel()
     }
     
@@ -55,11 +55,10 @@ final class TopRatedMoviesViewController: UIViewController {
     private func configureSubviews() {
         view.backgroundColor = .white
         navigationItem.title = "Top Rated Movies"
-        
         view.addSubview(collectionView)
     }
     
-    private func configureAutoLayout() {
+    private func configureLayout() {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -71,8 +70,9 @@ final class TopRatedMoviesViewController: UIViewController {
     private func bindViewModel() {
         let input = TopRatedMoviesViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asSignal(),
-            refreshPulled: refreshControl.rx.controlEvent(.valueChanged).asSignal()
+            didPullCollectionView: refreshControl.rx.controlEvent(.valueChanged).asSignal()
         )
+        
         let output = viewModel.transform(
             input
         )
@@ -89,7 +89,7 @@ final class TopRatedMoviesViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        output.refreshReleased
+        output.isRefreshing
             .drive(refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
     }
@@ -109,6 +109,7 @@ fileprivate extension UICollectionViewCompositionalLayout {
             trailing: .flexible(4.0),
             bottom: nil
         )
+        
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(200.0)
@@ -117,8 +118,10 @@ fileprivate extension UICollectionViewCompositionalLayout {
             layoutSize: groupSize,
             subitems: [item]
         )
+        
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 24.0
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

@@ -13,22 +13,22 @@ final class TopRatedMoviesViewModel {
     struct Input {
         
         let viewWillAppear: Signal<Void>
-        let refreshPulled: Signal<Void>
+        let didPullCollectionView: Signal<Void>
     }
     
     struct Output {
         
         let isLoading: Driver<Bool>
+        let isRefreshing: Driver<Bool>
         let items: Driver<[TopRatedMoviesCell.Model]>
-        let refreshReleased: Driver<Bool>
     }
     
     func transform(_ input: Input) -> Output {
-        let viewWillAppear = input.viewWillAppear
+        let viewWillAppearObservable = input.viewWillAppear
             .asObservable()
             .share()
         
-        let items = viewWillAppear
+        let itemsObservable = viewWillAppearObservable
             .delay(.seconds(2), scheduler: MainScheduler.instance)
             .map { _ -> [TopRatedMoviesCell.Model] in
                 (0...10).map { _ in .init() }
@@ -36,24 +36,25 @@ final class TopRatedMoviesViewModel {
             .asObservable()
             .share()
         
-        let isLoading = Observable.merge(
-            viewWillAppear.map { _ in true },
-            items.map { _ in false }
-        )
-        .asDriver(onErrorJustReturn: false)
+        let isLoading = Observable
+            .merge(
+                viewWillAppearObservable.map { _ in true },
+                itemsObservable.map { _ in false }
+            )
+            .asDriver(onErrorJustReturn: false)
         
-        let itemsDriver = items
-            .asDriver(onErrorJustReturn: [])
-        
-        let refreshReleased = input.refreshPulled
-            .delay(.seconds(1))
+        let isRefreshing = input.didPullCollectionView
+            .delay(.seconds(2))
             .map { _ in false }
             .asDriver(onErrorJustReturn: false)
         
+        let items = itemsObservable
+            .asDriver(onErrorJustReturn: [])
+        
         return Output(
             isLoading: isLoading,
-            items: itemsDriver,
-            refreshReleased: refreshReleased
+            isRefreshing: isRefreshing,
+            items: items
         )
     }
 }
