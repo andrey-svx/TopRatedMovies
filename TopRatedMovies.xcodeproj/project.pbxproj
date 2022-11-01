@@ -206,6 +206,7 @@
 			packageReferences = (
 				318A8428290EFEDE00A9B0D1 /* XCRemoteSwiftPackageReference "Swinject" */,
 				318A842D290F069800A9B0D1 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				3127444D2911AFD200E3F69D /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 317A55BD290E62D3007F1C31 /* Products */;
 			projectDirPath = "";
@@ -462,6 +463,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3127444D2911AFD200E3F69D /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
 		318A8428290EFEDE00A9B0D1 /* XCRemoteSwiftPackageReference "Swinject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject.git";
@@ -475,7 +484,7 @@
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 6.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
