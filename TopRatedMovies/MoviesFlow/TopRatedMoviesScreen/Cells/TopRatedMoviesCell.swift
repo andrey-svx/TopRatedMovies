@@ -37,6 +37,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 12.0
         imageView.backgroundColor = .systemBlue
         imageView.setContentCompressionResistancePriority(.required, for: .vertical)
+        imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return imageView
     }()
     
@@ -44,6 +45,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: 18.0, weight: .medium)
+        label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
@@ -53,6 +55,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .gray
+        label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
@@ -65,6 +68,8 @@ final class TopRatedMoviesCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.spacing = 4.0
         stack.setContentCompressionResistancePriority(.required, for: .vertical)
+        stack.setContentHuggingPriority(.required, for: .vertical)
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -75,6 +80,8 @@ final class TopRatedMoviesCell: UICollectionViewCell {
         ])
         stack.axis = .vertical
         stack.spacing = 28.0
+        stack.distribution = .fill
+        stack.alignment = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
         
         return stack
@@ -98,16 +105,16 @@ final class TopRatedMoviesCell: UICollectionViewCell {
     }
     
     private func configureViewAndSubviews() {
-        addSubview(mainStack)
-        addSubview(ratingView)
+        contentView.addSubview(mainStack)
+        contentView.addSubview(ratingView)
     }
     
     private func configureAutoLayout() {
         NSLayoutConstraint.activate([
-            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            mainStack.topAnchor.constraint(equalTo: topAnchor),
-            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            mainStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             ratingView.widthAnchor.constraint(equalToConstant: 48.0),
             ratingView.heightAnchor.constraint(equalTo: ratingView.widthAnchor),
