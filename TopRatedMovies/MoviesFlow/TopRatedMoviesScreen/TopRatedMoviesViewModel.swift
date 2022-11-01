@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxCocoa
+import UIKit.UIImage
 
 final class TopRatedMoviesViewModel {
     
@@ -29,9 +30,17 @@ final class TopRatedMoviesViewModel {
             .share()
         
         let itemsObservable = viewWillAppearObservable
-            .delay(.seconds(2), scheduler: MainScheduler.instance)
+//            .delay(.seconds(1), scheduler: MainScheduler.instance)
             .map { _ -> [TopRatedMoviesCell.Model] in
-                (0...10).map { _ in .init() }
+                (0...10).map { _ in
+                    .init(
+                        image: UIImage(named: "dark-knight"),
+                        name: "Темный Рыцарь",
+                        year:  "2015 г",
+                        rating: 87
+                    )
+                    
+                }
             }
             .asObservable()
             .share()
@@ -44,7 +53,7 @@ final class TopRatedMoviesViewModel {
             .asDriver(onErrorJustReturn: false)
         
         let isRefreshing = input.didPullCollectionView
-            .delay(.seconds(2))
+//            .delay(.seconds(1))
             .map { _ in false }
             .asDriver(onErrorJustReturn: false)
         

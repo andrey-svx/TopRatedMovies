@@ -43,7 +43,7 @@ final class TopRatedMoviesViewController: UIViewController {
         super.viewDidLoad()
         
         setupCollectionView()
-        configureSubviews()
+        configureViewAndSubviews()
         configureLayout()
         bindViewModel()
     }
@@ -52,7 +52,7 @@ final class TopRatedMoviesViewController: UIViewController {
         collectionView.register(TopRatedMoviesCell.self)
     }
     
-    private func configureSubviews() {
+    private func configureViewAndSubviews() {
         view.backgroundColor = .white
         navigationItem.title = "Top Rated Movies"
         view.addSubview(collectionView)
@@ -82,9 +82,10 @@ final class TopRatedMoviesViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output.items
-            .drive(collectionView.rx.items) { (collectionView, row, element) in
+            .drive(collectionView.rx.items) { (collectionView, row, model) in
                 let indexPath = IndexPath(row: row, section: 0)
                 let cell: TopRatedMoviesCell = collectionView.dequeueReusableCell(for: indexPath)
+                cell.model = model
                 return cell
             }
             .disposed(by: disposeBag)
@@ -100,27 +101,28 @@ fileprivate extension UICollectionViewCompositionalLayout {
     static func tiles() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.45),
-            heightDimension: .fractionalHeight(1.0)
+            heightDimension: .estimated(CGFloat.leastNonzeroMagnitude)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: .flexible(4.0),
-            top: nil,
-            trailing: .flexible(4.0),
-            bottom: nil
-        )
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(200.0)
+            heightDimension: .estimated(CGFloat.leastNonzeroMagnitude)
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
             subitems: [item]
         )
+        group.interItemSpacing = .flexible(CGFloat.leastNonzeroMagnitude)
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 24.0
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 8.0,
+            leading: 8.0,
+            bottom: 8.0,
+            trailing: 8.0
+        )
         
         return UICollectionViewCompositionalLayout(section: section)
     }
