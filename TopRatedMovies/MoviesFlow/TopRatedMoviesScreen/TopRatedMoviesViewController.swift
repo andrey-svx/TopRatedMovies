@@ -70,7 +70,7 @@ final class TopRatedMoviesViewController: UIViewController {
     private func bindViewModel() {
         let input = TopRatedMoviesViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asSignal(),
-            didPullCollectionView: refreshControl.rx.controlEvent(.valueChanged).asSignal()
+            didPullCollectionView: refreshControl.rx.pull.asSignal()
         )
         
         let output = viewModel.transform(

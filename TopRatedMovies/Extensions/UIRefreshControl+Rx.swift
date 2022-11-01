@@ -11,5 +11,7 @@ import RxCocoa
 
 extension Reactive where Base: UIRefreshControl {
     
-    // TODO: add pull Signal
+    var pull: ControlEvent<Void> {
+        controlEvent(.valueChanged)
+    }
 }
