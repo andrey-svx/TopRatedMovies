@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		311251402911B19300027611 /* MoviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112513F2911B19300027611 /* MoviesAPI.swift */; };
+		311251432911B22E00027611 /* APIConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311251422911B22E00027611 /* APIConfigProvider.swift */; };
+		311251452911B24500027611 /* APIConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 311251442911B24500027611 /* APIConfig.plist */; };
 		3127444C2911897A00E3F69D /* CircleRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127444B2911897A00E3F69D /* CircleRatingView.swift */; };
 		3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */; };
 		3143510229103CB000A311E2 /* TopRatedMoviesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3143510129103CB000A311E2 /* TopRatedMoviesCell.swift */; };
@@ -27,9 +30,14 @@
 		318A8431290F069800A9B0D1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 318A8430290F069800A9B0D1 /* RxRelay */; };
 		318A8433290F069800A9B0D1 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 318A8432290F069800A9B0D1 /* RxSwift */; };
 		318A8435290F0A0300A9B0D1 /* MoviesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318A8434290F0A0300A9B0D1 /* MoviesCoordinator.swift */; };
+		31CA2A672911BB1600658D03 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A662911BB1600658D03 /* Moya */; };
+		31CA2A692911BB2200658D03 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A682911BB2200658D03 /* RxMoya */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3112513F2911B19300027611 /* MoviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPI.swift; sourceTree = "<group>"; };
+		311251422911B22E00027611 /* APIConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigProvider.swift; sourceTree = "<group>"; };
+		311251442911B24500027611 /* APIConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIConfig.plist; sourceTree = "<group>"; };
 		3127444B2911897A00E3F69D /* CircleRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleRatingView.swift; sourceTree = "<group>"; };
 		314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesViewModel.swift; sourceTree = "<group>"; };
 		3143510129103CB000A311E2 /* TopRatedMoviesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesCell.swift; sourceTree = "<group>"; };
@@ -55,9 +63,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31CA2A692911BB2200658D03 /* RxMoya in Frameworks */,
 				318A8431290F069800A9B0D1 /* RxRelay in Frameworks */,
 				318A842F290F069800A9B0D1 /* RxCocoa in Frameworks */,
 				318A8433290F069800A9B0D1 /* RxSwift in Frameworks */,
+				31CA2A672911BB1600658D03 /* Moya in Frameworks */,
 				318A842A290EFEDE00A9B0D1 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +75,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		311251412911B19900027611 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3112513F2911B19300027611 /* MoviesAPI.swift */,
+				31CA2A642911B94800658D03 /* Config */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		3127444A2911895B00E3F69D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +135,7 @@
 			children = (
 				317A55BE290E62D3007F1C31 /* TopRatedMovies */,
 				317A55BD290E62D3007F1C31 /* Products */,
+				31CA2A652911BB1600658D03 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +154,7 @@
 				317A55C1290E62D3007F1C31 /* SceneDelegate.swift */,
 				3143510D2910641100A311E2 /* AppFlow */,
 				318A8436290F0A1100A9B0D1 /* MoviesFlow */,
+				311251412911B19900027611 /* Networking */,
 				3143510C2910623300A311E2 /* Uitilities */,
 				31435105291045B600A311E2 /* Extensions */,
 				317A55C8290E62D5007F1C31 /* Assets.xcassets */,
@@ -151,6 +172,22 @@
 				314350FE29103A1600A311E2 /* TopRatedMoviesScreen */,
 			);
 			path = MoviesFlow;
+			sourceTree = "<group>";
+		};
+		31CA2A642911B94800658D03 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				311251422911B22E00027611 /* APIConfigProvider.swift */,
+				311251442911B24500027611 /* APIConfig.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		31CA2A652911BB1600658D03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +211,8 @@
 				318A842E290F069800A9B0D1 /* RxCocoa */,
 				318A8430290F069800A9B0D1 /* RxRelay */,
 				318A8432290F069800A9B0D1 /* RxSwift */,
+				31CA2A662911BB1600658D03 /* Moya */,
+				31CA2A682911BB2200658D03 /* RxMoya */,
 			);
 			productName = TopRatedMovies;
 			productReference = 317A55BC290E62D3007F1C31 /* TopRatedMovies.app */;
@@ -223,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				317A55CC290E62D5007F1C31 /* LaunchScreen.storyboard in Resources */,
+				311251452911B24500027611 /* APIConfig.plist in Resources */,
 				317A55C9290E62D5007F1C31 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,10 +281,12 @@
 				318A842C290F01AE00A9B0D1 /* AppCoordinator.swift in Sources */,
 				3143510B291061A500A311E2 /* AppFlowAssembly.swift in Sources */,
 				3143510F2910648B00A311E2 /* MoviesFlowAssembly.swift in Sources */,
+				311251432911B22E00027611 /* APIConfigProvider.swift in Sources */,
 				314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */,
 				318A8435290F0A0300A9B0D1 /* MoviesCoordinator.swift in Sources */,
 				317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */,
 				3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */,
+				311251402911B19300027611 /* MoviesAPI.swift in Sources */,
 				3127444C2911897A00E3F69D /* CircleRatingView.swift in Sources */,
 				317A55C2290E62D3007F1C31 /* SceneDelegate.swift in Sources */,
 				314351112910F3C800A311E2 /* UIRefreshControl+Rx.swift in Sources */,
@@ -509,6 +551,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 318A842D290F069800A9B0D1 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		31CA2A662911BB1600658D03 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3127444D2911AFD200E3F69D /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		31CA2A682911BB2200658D03 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3127444D2911AFD200E3F69D /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
