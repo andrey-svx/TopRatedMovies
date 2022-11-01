@@ -5,11 +5,15 @@
 //  Created by Андрей Исаев on 31.10.2022.
 //
 
+import UIKit.UIImage
 import RxSwift
 import RxCocoa
-import UIKit.UIImage
+import Moya
+import RxMoya
 
 final class TopRatedMoviesViewModel {
+    
+    private let moviesProvider: MoyaProvider<MoviesAPI> = .init()
     
     struct Input {
         
@@ -29,17 +33,25 @@ final class TopRatedMoviesViewModel {
             .asObservable()
             .share()
         
-        let itemsObservable = viewWillAppearObservable
-//            .delay(.seconds(1), scheduler: MainScheduler.instance)
-            .map { _ -> [TopRatedMoviesCell.Model] in
-                (0...10).map { _ in
+        let didPullCollectionViewObservable = input.didPullCollectionView
+            .asObservable()
+        
+        let itemsObservable = Observable
+            .merge(viewWillAppearObservable, didPullCollectionViewObservable)
+            .flatMap { [moviesProvider] in
+                moviesProvider.rx.request(.topRated, callbackQueue: .main)
+                    .map(TopRatedMoviesResponse.self)
+                    .map { $0.results }
+            }
+            .map { $0.sorted(by: { $0.popularity > $1.popularity }) }
+            .map { results -> [TopRatedMoviesCell.Model] in
+                results.map {
                     .init(
                         image: UIImage(named: "dark-knight"),
-                        name: "Темный Рыцарь",
-                        year:  "2015 г",
-                        rating: 87
+                        name: $0.title,
+                        year: $0.releaseDate,
+                        rating: Int($0.popularity.rounded())
                     )
-                    
                 }
             }
             .asObservable()
@@ -53,7 +65,6 @@ final class TopRatedMoviesViewModel {
             .asDriver(onErrorJustReturn: false)
         
         let isRefreshing = input.didPullCollectionView
-//            .delay(.seconds(1))
             .map { _ in false }
             .asDriver(onErrorJustReturn: false)
         

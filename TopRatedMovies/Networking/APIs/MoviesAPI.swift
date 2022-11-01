@@ -35,7 +35,14 @@ extension MoviesAPI: TargetType {
     var task: Task {
         switch self {
         case .topRated:
-            return .requestPlain
+            return .requestParameters(
+                parameters: [
+                    "api_key": APIConfigProvider.shared.apiKey,
+                    "page": 1,
+                    "region": "kz"
+                ],
+                encoding: URLEncoding.default
+            )
         }
     }
     
