@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>host</key>
-	<string>https://api.themoviedb.org/</string>
+	<key>main_host</key>
+	<string>https://api.themoviedb.org</string>
+	<key>images_host</key>
+	<string>https://image.tmdb.org/t/p</string>
 	<key>api_key</key>
 	<string>d399bf2f488092e278ffa462c3047519</string>
 	<key>initial_access_token</key>

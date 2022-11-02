@@ -9,7 +9,8 @@ import Foundation
 
 final class APIConfigProvider {
     
-    let host: String
+    let mainHost: String
+    let imagesHost: String
     let apiKey: String
     let initialAccessToken: String
     
@@ -21,7 +22,8 @@ final class APIConfigProvider {
         let plist = try! PropertyListSerialization.propertyList(from: data, options: [], format: nil)
         let config = plist as! Dictionary<String, String>
         
-        self.host = config["host"]!
+        self.mainHost = config["main_host"]!
+        self.imagesHost = config["images_host"]!
         self.apiKey = config["api_key"]!
         self.initialAccessToken = config["initial_access_token"]!
     }
