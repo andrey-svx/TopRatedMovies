@@ -7,6 +7,7 @@
 
 import Swinject
 import UIKit.UINavigationController
+import Moya
 
 final class MoviesFlowAssembly: Assembly {
     
@@ -21,7 +22,11 @@ final class MoviesFlowAssembly: Assembly {
         }
         
         container.register(TopRatedMoviesViewModel.self) { _ in
-            TopRatedMoviesViewModel()
+            let getTopRatedMovies = GetTopRatedMoviesUseCase(
+                MoyaProvider<MoviesAPI>(),
+                MoyaProvider<ImagesAPI>()
+            )
+            return TopRatedMoviesViewModel(getTopRatedMovies)
         }
     }
 }

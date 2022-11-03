@@ -13,8 +13,11 @@ import RxMoya
 
 final class TopRatedMoviesViewModel {
     
-    private let moviesProvider: MoyaProvider<MoviesAPI> = .init()
-    private let imagesProvider: MoyaProvider<ImagesAPI> = .init()
+    private let getTopRatedMovies: GetTopRatedMoviesUseCase
+    
+    init(_ getTopRatedMovies: GetTopRatedMoviesUseCase) {
+        self.getTopRatedMovies = getTopRatedMovies
+    }
     
     struct Input {
         
@@ -39,25 +42,7 @@ final class TopRatedMoviesViewModel {
         
         let itemsObservable = Observable
             .merge(viewWillAppearObservable, didPullCollectionViewObservable)
-            .flatMap { [moviesProvider, imagesProvider] in
-                moviesProvider.rx.request(.topRated, callbackQueue: .main)
-                    .map(TopRatedMoviesResponse.self)
-                    .map { $0.results }
-                    .map { results in results.sorted(by: { $0.popularity > $1.popularity }) }
-                    .flatMap { results -> Single<[(TopRatedMoviesResponse.Result, Image)]> in
-                        Observable.from(results.map(\.posterPath))
-                            .flatMap { path in
-                                imagesProvider.rx.request(.w200(path), callbackQueue: .main)
-                                    .mapImage()
-                                    .map { image in (image, path) }
-                            }
-                            .toArray()
-                            .map { imagePairs -> [(TopRatedMoviesResponse.Result, Image)] in
-                                let resultPairs = results.map { result in (result, result.posterPath) }
-                                return matching(resultPairs, imagePairs)
-                            }
-                    }
-            }
+            .flatMap { [getTopRatedMovies] in getTopRatedMovies() }
             .map { pairs -> [TopRatedMoviesCell.Model] in
                 pairs.map { (result, image) in
                     .init(
@@ -91,22 +76,4 @@ final class TopRatedMoviesViewModel {
             items: items
         )
     }
-}
-    
-fileprivate func matching<A, B, H: Hashable>(_ a: [(A, H)], _ b: [(B, H)]) -> [(A, B)] {
-    
-    guard a.count == b.count else {
-        fatalError("Arrays have different length")
-    }
-    
-    var result: [(A, B)] = []
-    
-    for (elementA, hash) in a {
-        guard let elementB = b.first(where: { $0.1 == hash })?.0 else {
-            fatalError("Could not find element of array a in array b")
-        }
-        result.append((elementA, elementB))
-    }
-    
-    return result
 }
