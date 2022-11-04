@@ -10,7 +10,7 @@ import Moya
 
 protocol ApiKeyable: TargetType { }
 
-struct ApiKeyPlugin: PluginType {
+struct ApiKeyablePlugin: PluginType {
     
     private let apiKeyClosure: () -> String?
     
@@ -24,19 +24,12 @@ struct ApiKeyPlugin: PluginType {
             return request
         }
         
-        guard let url = request.url else {
-            return request
-        }
-        
-        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            return request
-        }
-        
+        var components = request.url.flatMap { URLComponents(url: $0, resolvingAgainstBaseURL: true) }
         let item = URLQueryItem(name: "api_key", value: apiKeyClosure())
-        components.queryItems?.append(item)
+        components?.queryItems?.append(item)
         
         var request = request
-        request.url = components.url
+        request.url = components?.url
         
         return request
     }

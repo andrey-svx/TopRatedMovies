@@ -12,7 +12,8 @@ extension MoyaProvider {
     
     static func instantiate() -> MoyaProvider<Target> {
         let plugins: [PluginType] = [
-            ApiKeyPlugin { APIConfigProvider.shared.apiKey }
+            ApiKeyablePlugin { APIConfigProvider.shared.apiKey },
+            SessionIdentifiablePlugin { _ in fatalError("Not implemented yet") }
         ]
         let provider: MoyaProvider<Target> = .init(plugins: plugins)
         return provider
