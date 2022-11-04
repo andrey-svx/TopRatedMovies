@@ -9,7 +9,9 @@ import Foundation
 import Moya
 
 enum MoviesAPI {
+    
     case topRated
+    case details(String)
 }
 
 extension MoviesAPI: TargetType {
@@ -22,12 +24,16 @@ extension MoviesAPI: TargetType {
         switch self {
         case .topRated:
             return "/3/movie/top_rated"
+        case .details(let id):
+            return "/3/movie/" + id
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .topRated:
+            return .get
+        case .details:
             return .get
         }
     }
@@ -37,12 +43,13 @@ extension MoviesAPI: TargetType {
         case .topRated:
             return .requestParameters(
                 parameters: [
-                    "api_key": APIConfigProvider.shared.apiKey,
                     "page": 1,
                     "region": "kz"
                 ],
                 encoding: URLEncoding.default
             )
+        case .details:
+            return .requestPlain
         }
     }
     
@@ -50,3 +57,5 @@ extension MoviesAPI: TargetType {
         nil
     }
 }
+
+extension MoviesAPI: ApiKeyable { }
