@@ -19,6 +19,14 @@ final class MoviesCoordinator: Coordinator {
     
     override func start() {
         let viewController = resolver.resolve(TopRatedMoviesViewController.self)!
+        viewController.onCoordinated = { [weak self] signal in
+            switch signal {
+            case .empty:
+                break
+            case .details(let model):
+                break
+            }
+        }
         navigationController.viewControllers = [viewController]
     }
 }
