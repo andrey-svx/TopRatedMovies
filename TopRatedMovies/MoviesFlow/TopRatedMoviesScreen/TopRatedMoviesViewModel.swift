@@ -24,11 +24,11 @@ final class TopRatedMoviesViewModel {
     private let state = PublishRelay<State>()
     
     init(
-        _ getTopRatedMovies: GetTopRatedMoviesUseCase,
-        _ getMovieDetails: GetMovieDetailsUseCase
+        _ moviesProvider: MoyaProvider<MoviesAPI>,
+        _ imagesProvider: MoyaProvider<ImagesAPI>
     ) {
-        self.getTopRatedMovies = getTopRatedMovies
-        self.getMovieDetails = getMovieDetails
+        self.getTopRatedMovies = .init(moviesProvider, imagesProvider)
+        self.getMovieDetails = .init(moviesProvider, imagesProvider)
     }
     
     struct Input {

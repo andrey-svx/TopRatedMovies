@@ -22,15 +22,7 @@ final class MoviesFlowAssembly: Assembly {
         }
         
         container.register(TopRatedMoviesViewModel.self) { _ in
-            let getTopRatedMovies = GetTopRatedMoviesUseCase(
-                MoyaProvider<MoviesAPI>.instantiate(),
-                MoyaProvider<ImagesAPI>.instantiate()
-            )
-            let getMovieDetails = GetMovieDetailsUseCase(
-                MoyaProvider<MoviesAPI>.instantiate(),
-                MoyaProvider<ImagesAPI>.instantiate()
-            )
-            return TopRatedMoviesViewModel(getTopRatedMovies, getMovieDetails)
+            TopRatedMoviesViewModel(.instantiate(), .instantiate())
         }
     }
 }
