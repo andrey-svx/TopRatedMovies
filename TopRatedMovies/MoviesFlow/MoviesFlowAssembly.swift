@@ -26,7 +26,11 @@ final class MoviesFlowAssembly: Assembly {
                 MoyaProvider<MoviesAPI>.instantiate(),
                 MoyaProvider<ImagesAPI>.instantiate()
             )
-            return TopRatedMoviesViewModel(getTopRatedMovies)
+            let getMovieDetails = GetMovieDetailsUseCase(
+                MoyaProvider<MoviesAPI>.instantiate(),
+                MoyaProvider<ImagesAPI>.instantiate()
+            )
+            return TopRatedMoviesViewModel(getTopRatedMovies, getMovieDetails)
         }
     }
 }

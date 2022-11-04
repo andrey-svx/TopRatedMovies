@@ -15,8 +15,7 @@ import RxMoya
 final class TopRatedMoviesViewModel {
     
     private let getTopRatedMovies: GetTopRatedMoviesUseCase
-    private let moviesProvider = MoyaProvider<MoviesAPI>.instantiate()
-    private let imagesProvider = MoyaProvider<ImagesAPI>.instantiate()
+    private let getMovieDetails: GetMovieDetailsUseCase
     
     private struct State {
         let models: [TopRatedMovieModel]
@@ -24,8 +23,12 @@ final class TopRatedMoviesViewModel {
     
     private let state = PublishRelay<State>()
     
-    init(_ getTopRatedMovies: GetTopRatedMoviesUseCase) {
+    init(
+        _ getTopRatedMovies: GetTopRatedMoviesUseCase,
+        _ getMovieDetails: GetMovieDetailsUseCase
+    ) {
         self.getTopRatedMovies = getTopRatedMovies
+        self.getMovieDetails = getMovieDetails
     }
     
     struct Input {
@@ -79,15 +82,10 @@ final class TopRatedMoviesViewModel {
             .map { $0.item }
             .withLatestFrom(state.asObservable()) { index, state in state.models[index] }
             .map { $0.id }
-            .flatMapLatest { [moviesProvider, imagesProvider] id in
-                moviesProvider.rx.request(.details(id), callbackQueue: .main)
-                    .map(MovieDetailsResponse.self)
-                    .flatMap { response in
-                        imagesProvider.rx.request(.w500(response.posterPath), callbackQueue: .main)
-                            .mapImage()
-                            .map { image in (response, image) }
-                    }
+            .flatMapLatest { [getMovieDetails] id in
+                getMovieDetails(id: id)
             }
+            .compactMap { $0 }
             .share()
         
         let isLoading = Observable
@@ -100,8 +98,8 @@ final class TopRatedMoviesViewModel {
             .asDriver(onErrorJustReturn: false)
         
         let coordinate = movieDetailsObservable
-            .map { _ in TopRatedMoviesViewController.Output.details }
-            .asDriver(onErrorJustReturn: .empty)
+            .map { TopRatedMoviesViewController.Output.details($0) }
+            .asDriver(onErrorJustReturn: TopRatedMoviesViewController.Output.empty)
         
         return Output(
             isLoading: isLoading,

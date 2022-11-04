@@ -14,7 +14,7 @@ final class TopRatedMoviesViewController: UIViewController, Coordinatable {
     enum Output {
         
         case empty
-        case details
+        case details(MovieDetailsModel)
     }
     
     typealias T = Output
