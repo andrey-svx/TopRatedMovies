@@ -43,15 +43,8 @@ final class TopRatedMoviesViewModel {
         let itemsObservable = Observable
             .merge(viewWillAppearObservable, didPullCollectionViewObservable)
             .flatMap { [getTopRatedMovies] in getTopRatedMovies() }
-            .map { pairs -> [TopRatedMoviesCell.Model] in
-                pairs.map { (result, image) in
-                    .init(
-                        image: image,
-                        name: result.title,
-                        year: result.releaseDate,
-                        rating: Int(result.popularity)
-                    )
-                }
+            .map { domainModels -> [TopRatedMoviesCell.Model] in
+                domainModels.map { $0.cellModel() }
             }
             .asObservable()
             .share()
@@ -74,6 +67,18 @@ final class TopRatedMoviesViewModel {
             isLoading: isLoading,
             isRefreshing: isRefreshing,
             items: items
+        )
+    }
+}
+
+fileprivate extension TopRatedMovieModel {
+    
+    func cellModel() -> TopRatedMoviesCell.Model {
+        .init(
+            image: poster,
+            title: title,
+            year: String(Calendar.current.component(.year, from: releaseDate)),
+            rating: percentAverage
         )
     }
 }

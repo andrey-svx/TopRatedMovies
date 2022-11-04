@@ -23,7 +23,8 @@ struct GetTopRatedMoviesUseCase {
         self.imagesProvider = imagesProvider
     }
     
-    func callAsFunction() -> Single<[(TopRatedMoviesResponse.Result, Image)]> {
+//    func callAsFunction() -> Single<[(TopRatedMoviesResponse.Result, Image)]> {
+    func callAsFunction() -> Single<[TopRatedMovieModel]> {
         moviesProvider.rx.request(.topRated, callbackQueue: .main)
             .map(TopRatedMoviesResponse.self)
             .map { $0.results }
@@ -40,6 +41,9 @@ struct GetTopRatedMoviesUseCase {
                         let resultPairs = results.map { result in (result, result.posterPath) }
                         return matching(resultPairs, imagePairs)
                     }
+            }
+            .map { pairs -> [TopRatedMovieModel] in
+                pairs.compactMap { (result, image) in result.domainModel(image) }
             }
     }
 }
@@ -60,4 +64,24 @@ fileprivate func matching<A, B, H: Hashable>(_ a: [(A, H)], _ b: [(B, H)]) -> [(
     }
     
     return result
+}
+
+extension TopRatedMoviesResponse.Result {
+    
+    func domainModel(_ image: Image) -> TopRatedMovieModel? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let date = formatter.date(from: releaseDate) else {
+            return nil
+        }
+        
+        let percentVerage = Int(voteAverage * 10)
+        return .init(
+            id: id,
+            poster: image,
+            releaseDate: date,
+            title: title,
+            percentAverage: percentVerage
+        )
+    }
 }

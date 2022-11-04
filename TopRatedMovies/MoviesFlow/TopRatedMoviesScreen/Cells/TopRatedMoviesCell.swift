@@ -12,7 +12,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
     struct Model {
         
         let image: UIImage?
-        let name: String
+        let title: String
         let year: String
         let rating: Int
     }
@@ -24,7 +24,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
             }
 
             posterView.image = model.image
-            nameLabel.text = model.name
+            titleLabel.text = model.title
             yearLabel.text = model.year
             ratingView.rating = model.rating
         }
@@ -41,7 +41,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let nameLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: 18.0, weight: .medium)
@@ -62,7 +62,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
     
     private lazy var labelsStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            nameLabel,
+            titleLabel,
             yearLabel
         ])
         stack.axis = .vertical

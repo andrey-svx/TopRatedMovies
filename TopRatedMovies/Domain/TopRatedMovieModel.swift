@@ -11,9 +11,8 @@ import UIKit.UIImage
 struct TopRatedMovieModel {
     
     let id: Int
-    let popularity: Double
     let poster: UIImage
     let releaseDate: Date
     let title: String
-    let voteAverage: Double
+    let percentAverage: Int
 }
