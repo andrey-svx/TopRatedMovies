@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum SessionIdentifier {
-    case session, guestSession
+    case sessionId, guestSessionId
 }
 
 protocol SessionIdentifiable: TargetType {
@@ -35,9 +35,9 @@ struct SessionIdentifiablePlugin: PluginType {
         var components = request.url.flatMap { URLComponents(url: $0, resolvingAgainstBaseURL: true) }
         let name: String
         switch sessionIdentifier {
-        case .session:
+        case .sessionId:
             name = "session_id"
-        case .guestSession:
+        case .guestSessionId:
             name = "guest_session_id"
         }
         let item = URLQueryItem(name: name, value: sessionIdentifierClosure(sessionIdentifier))

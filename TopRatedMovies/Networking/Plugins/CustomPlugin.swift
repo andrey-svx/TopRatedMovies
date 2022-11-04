@@ -8,24 +8,32 @@
 import Foundation
 import Moya
 
-struct CustomPlugin: PluginType {
+struct CustomPlugin<Target: TargetType>: PluginType {
     
-    private let prepareClosure: (_ request: URLRequest, _ target: TargetType) -> URLRequest
-    private let didReceiveClosure: (_ result: Result<Response, MoyaError>, _ target: TargetType) -> Void
+    private let prepareClosure: (_ request: URLRequest, _ target: Target) -> URLRequest
+    private let didReceiveClosure: (_ result: Result<Response, MoyaError>, _ target: Target) -> Void
     
     init(
-        _ prepareClosure: @escaping (URLRequest, TargetType) -> URLRequest,
-        _ didReceiveClosure: @escaping (_ result: Result<Response, MoyaError>, _ target: TargetType) -> Void
+        _ prepareClosure: @escaping (URLRequest, Target) -> URLRequest,
+        _ didReceiveClosure: @escaping (_ result: Result<Response, MoyaError>, _ target: Target) -> Void
     ) {
         self.prepareClosure = prepareClosure
         self.didReceiveClosure = didReceiveClosure
     }
     
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
-        prepareClosure(request, target)
+        guard let target = target as? Target else {
+            return request
+        }
+        
+        return prepareClosure(request, target)
     }
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
+        guard let target = target as? Target else {
+            return
+        }
+        
         didReceiveClosure(result, target)
     }
 }

@@ -12,6 +12,7 @@ extension MoyaProvider {
     
     static func instantiate() -> MoyaProvider<Target> {
         let plugins: [PluginType] = [
+            NetworkLoggerPlugin.default,
             ApiKeyablePlugin { APIConfigProvider.shared.apiKey },
             SessionIdentifiablePlugin { _ in fatalError("Not implemented yet") }
         ]
@@ -20,8 +21,8 @@ extension MoyaProvider {
     }
     
     static func instantiate(
-        _ prepareClosure: @escaping (_ request: URLRequest, _ target: TargetType) -> URLRequest,
-        _ didReceiveClosure: @escaping (_ result: Result<Response, MoyaError>, _ target: TargetType) -> Void
+        _ prepareClosure: @escaping (_ request: URLRequest, _ target: Target) -> URLRequest,
+        _ didReceiveClosure: @escaping (_ result: Result<Response, MoyaError>, _ target: Target) -> Void
     ) -> MoyaProvider<Target> {
         let plugins: [PluginType] = [
             CustomPlugin(prepareClosure, didReceiveClosure)

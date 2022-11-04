@@ -11,7 +11,7 @@ import Moya
 enum MoviesAPI {
     
     case topRated
-    case details(String)
+    case details(Int)
 }
 
 extension MoviesAPI: TargetType {
@@ -25,7 +25,7 @@ extension MoviesAPI: TargetType {
         case .topRated:
             return "/3/movie/top_rated"
         case .details(let id):
-            return "/3/movie/" + id
+            return "/3/movie/\(id)"
         }
     }
     

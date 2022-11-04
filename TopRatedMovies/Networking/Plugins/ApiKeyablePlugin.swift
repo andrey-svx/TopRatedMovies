@@ -26,11 +26,13 @@ struct ApiKeyablePlugin: PluginType {
         
         var components = request.url.flatMap { URLComponents(url: $0, resolvingAgainstBaseURL: true) }
         let item = URLQueryItem(name: "api_key", value: apiKeyClosure())
-        components?.queryItems?.append(item)
+        var queryItems = components?.queryItems ?? []
+        queryItems.append(item)
+        components?.queryItems = queryItems
         
-        var request = request
-        request.url = components?.url
+        var modifiedRequest = request
+        modifiedRequest.url = components?.url
         
-        return request
+        return modifiedRequest
     }
 }
