@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import Swinject
 
 final class AppCoordinator: Coordinator {
     
-    private var window: UIWindow?
+    private let window: UIWindow?
+    private let resolver: Resolver
     
-    init(_ window: UIWindow?) {
+    init(_ window: UIWindow?, resolver: Resolver) {
         self.window = window
+        self.resolver = resolver
         
         let navigationController = UINavigationController()
         super.init(navigationController)
@@ -22,7 +25,10 @@ final class AppCoordinator: Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        let moviesCoordinator = MoviesCoordinator(navigationController)
+        let moviesCoordinator = resolver.resolve(
+            MoviesCoordinator.self,
+            argument: navigationController
+        )!
         retain(moviesCoordinator)
         moviesCoordinator.start()
     }
