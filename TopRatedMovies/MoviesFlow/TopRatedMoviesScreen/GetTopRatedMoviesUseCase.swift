@@ -23,7 +23,6 @@ struct GetTopRatedMoviesUseCase {
         self.imagesProvider = imagesProvider
     }
     
-//    func callAsFunction() -> Single<[(TopRatedMoviesResponse.Result, Image)]> {
     func callAsFunction() -> Single<[TopRatedMovieModel]> {
         moviesProvider.rx.request(.topRated, callbackQueue: .main)
             .map(TopRatedMoviesResponse.self)
@@ -45,6 +44,7 @@ struct GetTopRatedMoviesUseCase {
             .map { pairs -> [TopRatedMovieModel] in
                 pairs.compactMap { (result, image) in result.domainModel(image) }
             }
+            .catchAndReturn([])
     }
 }
 

@@ -7,6 +7,7 @@
 
 import UIKit.UIImage
 import RxSwift
+import RxRelay
 import RxCocoa
 import Moya
 import RxMoya
@@ -14,6 +15,12 @@ import RxMoya
 final class TopRatedMoviesViewModel {
     
     private let getTopRatedMovies: GetTopRatedMoviesUseCase
+    
+    private struct State {
+        let models: [TopRatedMovieModel]
+    }
+    
+    private let state = PublishRelay<State>()
     
     init(_ getTopRatedMovies: GetTopRatedMoviesUseCase) {
         self.getTopRatedMovies = getTopRatedMovies
@@ -43,6 +50,7 @@ final class TopRatedMoviesViewModel {
         let itemsObservable = Observable
             .merge(viewWillAppearObservable, didPullCollectionViewObservable)
             .flatMap { [getTopRatedMovies] in getTopRatedMovies() }
+            .do(onNext: { [weak self] in self?.state.accept(.init(models: $0)) })
             .map { domainModels -> [TopRatedMoviesCell.Model] in
                 domainModels.map { $0.cellModel() }
             }
