@@ -47,7 +47,10 @@ extension SlideTransition: UIViewControllerAnimatedTransitioning {
         let containerView = transitionContext.containerView
 
         let bottomLeftCorner = CGPoint(x: .zero, y: containerView.bounds.height)
-        let size = CGSize(width: containerView.bounds.width, height: containerView.bounds.height / 2.0)
+        let size = CGSize(
+            width: containerView.bounds.width,
+            height: containerView.bounds.height / 2.0
+        )
             
         let offScreenFrame = CGRect(
             origin: bottomLeftCorner,
@@ -67,7 +70,7 @@ extension SlideTransition: UIViewControllerAnimatedTransitioning {
         dimmingView.alpha = isPresenting ? 0.0 : 0.5
 
         animatedView.frame = startFrame
-        animatedView.layer.cornerRadius = 8.0
+        animatedView.layer.cornerRadius = 16.0
         animatedView.clipsToBounds = true
 
         UIView.animate(
