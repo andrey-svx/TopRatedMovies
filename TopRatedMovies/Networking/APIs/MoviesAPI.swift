@@ -12,6 +12,7 @@ enum MoviesAPI {
     
     case topRated
     case details(Int)
+    case rate(id: Int, rating: Double)
 }
 
 extension MoviesAPI: TargetType {
@@ -26,6 +27,8 @@ extension MoviesAPI: TargetType {
             return "/3/movie/top_rated"
         case .details(let id):
             return "/3/movie/\(id)"
+        case .rate(id: let id, rating: _):
+            return "/3/movie/\(id)/rating"
         }
     }
     
@@ -35,6 +38,8 @@ extension MoviesAPI: TargetType {
             return .get
         case .details:
             return .get
+        case .rate:
+            return .post
         }
     }
     
@@ -50,6 +55,10 @@ extension MoviesAPI: TargetType {
             )
         case .details:
             return .requestPlain
+        case .rate(id: _, rating: let rating):
+            let body = RateMovieRequestBody(value: rating)
+            let data = (try? JSONEncoder().encode(body)) ?? .init()
+            return .requestData(data)
         }
     }
     
@@ -59,3 +68,17 @@ extension MoviesAPI: TargetType {
 }
 
 extension MoviesAPI: ApiKeyable { }
+
+extension MoviesAPI: SessionIdentifiable {
+    
+    var sessionIdentifier: SessionIdentifier? {
+        switch self {
+        case .topRated:
+            return nil
+        case .details:
+            return nil
+        case .rate:
+            return .sessionId
+        }
+    }
+}
