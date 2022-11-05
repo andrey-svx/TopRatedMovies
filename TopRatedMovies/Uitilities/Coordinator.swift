@@ -7,11 +7,11 @@
 
 import UIKit.UINavigationController
 
-protocol Completable {
+protocol Coordinatable {
     
     associatedtype T
     
-    var onComplete: ((T) -> Void)? { get set }
+    var onCoordinated: ((T) -> Void)? { get set }
 }
 
 open class Coordinator: NSObject {

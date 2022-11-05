@@ -87,8 +87,8 @@ final class TopRatedMoviesCell: UICollectionViewCell {
         return stack
     }()
     
-    private let ratingView: CircleRatingView = {
-        let ratingView = CircleRatingView()
+    private let ratingView: CircleRatingControl = {
+        let ratingView = CircleRatingControl()
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         return ratingView
     }()
@@ -115,7 +115,7 @@ final class TopRatedMoviesCell: UICollectionViewCell {
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor),
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
+
             ratingView.widthAnchor.constraint(equalToConstant: 48.0),
             ratingView.heightAnchor.constraint(equalTo: ratingView.widthAnchor),
             ratingView.centerXAnchor.constraint(equalTo: posterView.leadingAnchor, constant: 24.0 + 16.0),

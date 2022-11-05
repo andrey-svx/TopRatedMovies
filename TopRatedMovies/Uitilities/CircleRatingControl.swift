@@ -6,17 +6,22 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-final class CircleRatingView: UIView {
+final class CircleRatingControl: UIControl {
     
-    var rating: Int = 0 {
+    var rating: Int? = 0 {
         didSet {            
-            ratingLabel.text = "\(rating)%"
+            ratingLabel.text = "\(rating ?? 0)%"
         }
     }
     
-    private let ratingLabel: UILabel = {
+    private lazy var ratingLabel: UILabel = {
         let label = UILabel()
+        label.isUserInteractionEnabled = true
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        label.addGestureRecognizer(recognizer)
         label.font = .systemFont(ofSize: 16.0, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -49,5 +54,23 @@ final class CircleRatingView: UIView {
         super.layoutSubviews()
         
         layer.cornerRadius = bounds.width / 2.0
+    }
+    
+    @objc private func handleTap() {
+        sendActions(for: .touchUpInside)
+    }
+}
+
+
+extension Reactive where Base: CircleRatingControl {
+    
+    var rating: Binder<Int?> {
+        Binder(base) { circleRatingView, value in
+            circleRatingView.rating = value
+        }
+    }
+    
+    var tap: ControlEvent<Void> {
+        controlEvent(.touchUpInside)
     }
 }

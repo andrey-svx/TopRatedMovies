@@ -9,7 +9,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class TopRatedMoviesViewController: UIViewController {
+final class TopRatedMoviesViewController: UIViewController, Coordinatable {
+    
+    enum Output {
+        
+        case empty
+        case details(MovieDetailsModel)
+    }
+    
+    typealias T = Output
+    
+    var onCoordinated: ((T) -> Void)?
     
     private let refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -70,7 +80,8 @@ final class TopRatedMoviesViewController: UIViewController {
     private func bindViewModel() {
         let input = TopRatedMoviesViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asSignal(),
-            didPullCollectionView: refreshControl.rx.pull.asSignal()
+            didPullCollectionView: refreshControl.rx.pull.asSignal(),
+            didSelectItem: collectionView.rx.itemSelected.asSignal()
         )
         
         let output = viewModel.transform(
@@ -92,6 +103,10 @@ final class TopRatedMoviesViewController: UIViewController {
         
         output.isRefreshing
             .drive(refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        output.coordinate
+            .drive(onNext: { [weak self] in self?.onCoordinated?($0) })
             .disposed(by: disposeBag)
     }
 }

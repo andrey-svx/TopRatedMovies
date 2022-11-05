@@ -15,21 +15,27 @@ import RxMoya
 final class TopRatedMoviesViewModel {
     
     private let getTopRatedMovies: GetTopRatedMoviesUseCase
+    private let getMovieDetails: GetMovieDetailsUseCase
     
     private struct State {
         let models: [TopRatedMovieModel]
     }
     
-    private let state = PublishRelay<State>()
+    private let stateRelay = PublishRelay<State>()
     
-    init(_ getTopRatedMovies: GetTopRatedMoviesUseCase) {
-        self.getTopRatedMovies = getTopRatedMovies
+    init(
+        _ moviesProvider: MoyaProvider<MoviesAPI>,
+        _ imagesProvider: MoyaProvider<ImagesAPI>
+    ) {
+        self.getTopRatedMovies = .init(moviesProvider, imagesProvider)
+        self.getMovieDetails = .init(moviesProvider, imagesProvider)
     }
     
     struct Input {
         
         let viewWillAppear: Signal<Void>
         let didPullCollectionView: Signal<Void>
+        let didSelectItem: Signal<IndexPath>
     }
     
     struct Output {
@@ -37,32 +43,30 @@ final class TopRatedMoviesViewModel {
         let isLoading: Driver<Bool>
         let isRefreshing: Driver<Bool>
         let items: Driver<[TopRatedMoviesCell.Model]>
+        let coordinate: Driver<TopRatedMoviesViewController.Output>
     }
     
+    private let disposeBag = DisposeBag()
+    
     func transform(_ input: Input) -> Output {
-        let viewWillAppearObservable = input.viewWillAppear
+        
+        let viewWillAppearFirstTimeObservable = input.viewWillAppear
             .asObservable()
+            .take(1)
             .share()
         
         let didPullCollectionViewObservable = input.didPullCollectionView
             .asObservable()
         
         let itemsObservable = Observable
-            .merge(viewWillAppearObservable, didPullCollectionViewObservable)
+            .merge(viewWillAppearFirstTimeObservable, didPullCollectionViewObservable)
             .flatMap { [getTopRatedMovies] in getTopRatedMovies() }
-            .do(onNext: { [weak self] in self?.state.accept(.init(models: $0)) })
+            .do(onNext: { [weak self] in self?.stateRelay.accept(.init(models: $0)) })
             .map { domainModels -> [TopRatedMoviesCell.Model] in
                 domainModels.map { $0.cellModel() }
             }
             .asObservable()
             .share()
-        
-        let isLoading = Observable
-            .merge(
-                viewWillAppearObservable.map { _ in true },
-                itemsObservable.map { _ in false }
-            )
-            .asDriver(onErrorJustReturn: false)
         
         let isRefreshing = input.didPullCollectionView
             .map { _ in false }
@@ -71,10 +75,38 @@ final class TopRatedMoviesViewModel {
         let items = itemsObservable
             .asDriver(onErrorJustReturn: [])
         
+        let didSelectItemObservable = input.didSelectItem
+            .asObservable()
+            .share()
+        
+        let movieDetailsObservable = didSelectItemObservable
+            .map { $0.item }
+            .withLatestFrom(stateRelay.asObservable()) { index, state in state.models[index] }
+            .map { $0.id }
+            .flatMapLatest { [getMovieDetails] id in
+                getMovieDetails(id: id)
+            }
+            .compactMap { $0 }
+            .share()
+        
+        let isLoading = Observable
+            .merge(
+                viewWillAppearFirstTimeObservable.map { _ in true },
+                didSelectItemObservable.map { _ in true },
+                itemsObservable.map { _ in false },
+                movieDetailsObservable.map { _ in false }
+            )
+            .asDriver(onErrorJustReturn: false)
+        
+        let coordinate = movieDetailsObservable
+            .map { TopRatedMoviesViewController.Output.details($0) }
+            .asDriver(onErrorJustReturn: TopRatedMoviesViewController.Output.empty)
+        
         return Output(
             isLoading: isLoading,
             isRefreshing: isRefreshing,
-            items: items
+            items: items,
+            coordinate: coordinate
         )
     }
 }
