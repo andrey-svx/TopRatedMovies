@@ -13,7 +13,7 @@ import RxCocoa
 
 final class MovieDetailsViewModel {
     
-    private let stateRelay = PublishRelay<MovieDetailsModel>()
+    private let stateRelay = ReplayRelay<MovieDetailsModel>.create(bufferSize: 1)
     
     struct Input {
         
@@ -35,6 +35,7 @@ final class MovieDetailsViewModel {
     }
     
     func transform(_ input: Input) -> Output {
+        
         let viewWillAppearObservable = input.viewWillAppear
             .asObservable()
             .share()

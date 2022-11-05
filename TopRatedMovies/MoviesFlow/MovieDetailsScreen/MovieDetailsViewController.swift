@@ -19,23 +19,31 @@ final class MovieDetailsViewController: UIViewController {
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .vertical)
         imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
-        imageView.setContentCompressionResistancePriority(.required, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 3
+        label.font = .systemFont(ofSize: 18.0, weight: .semibold)
         return label
     }()
     
     private let yearLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 1
+        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 20.0, weight: .medium)
         return label
     }()
     
     private let overviewLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -51,6 +59,7 @@ final class MovieDetailsViewController: UIViewController {
             yearLabel
         ])
         stack.axis = .vertical
+        stack.spacing = 8.0
         return stack
     }()
 
@@ -59,15 +68,27 @@ final class MovieDetailsViewController: UIViewController {
             posterView,
             rightStack
         ])
+        stack.axis = .horizontal
+        stack.spacing = 12.0
+        stack.alignment = .top
         return stack
+    }()
+    
+    private let bottomSpacer: UIView = {
+        let view = UIView()
+        view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             topStack,
-            overviewLabel
+            overviewLabel,
+            bottomSpacer
         ])
         stack.axis = .vertical
+        stack.spacing = 24.0 + 12.0
         stack.distribution = .fill
         stack.clipsToBounds = true
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -105,10 +126,15 @@ final class MovieDetailsViewController: UIViewController {
     private func configureLayout() {
         NSLayoutConstraint.activate([
             posterView.widthAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 1/2),
+            posterView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/2),
+            
+            bottomSpacer.heightAnchor.constraint(greaterThanOrEqualToConstant: 100.0),
+            
             mainStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12.0),
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12.0),
             mainStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12.0),
-            mainStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 12.0),
+            mainStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12.0),
+            
             ratingView.widthAnchor.constraint(equalToConstant: 48.0),
             ratingView.heightAnchor.constraint(equalTo: ratingView.widthAnchor),
             ratingView.centerXAnchor.constraint(equalTo: posterView.leadingAnchor, constant: 24.0 + 16.0),
