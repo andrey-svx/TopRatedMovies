@@ -6,10 +6,77 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class MovieDetailsViewController: UIViewController {
     
+    private let posterView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12.0
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
+        imageView.setContentHuggingPriority(.required, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.required, for: .vertical)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    private let yearLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    private let overviewLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    private let ratingView: CircleRatingView = {
+        let ratingView = CircleRatingView()
+        ratingView.translatesAutoresizingMaskIntoConstraints = false
+        return ratingView
+    }()
+        
+    private lazy var rightStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            titleLabel,
+            yearLabel
+        ])
+        stack.axis = .vertical
+        return stack
+    }()
+
+    private lazy var topStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            posterView,
+            rightStack
+        ])
+        return stack
+    }()
+    
+    private lazy var mainStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [
+            topStack,
+            overviewLabel
+        ])
+        stack.axis = .vertical
+        stack.distribution = .fill
+        stack.clipsToBounds = true
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     private let viewModel: MovieDetailsViewModel
+    
+    private let disposeBag = DisposeBag()
     
     init(viewModel: MovieDetailsViewModel) {
         self.viewModel = viewModel
@@ -23,6 +90,55 @@ final class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemRed
+        configureViewAndSubviews()
+        configureLayout()
+        bindViewModel()
+    }
+    
+    private func configureViewAndSubviews() {
+        view.backgroundColor = .white
+        navigationItem.title = "Movie Details"
+        view.addSubview(mainStack)
+        view.addSubview(ratingView)
+    }
+    
+    private func configureLayout() {
+        NSLayoutConstraint.activate([
+            posterView.widthAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 1/2),
+            mainStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12.0),
+            mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12.0),
+            mainStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12.0),
+            mainStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 12.0),
+            ratingView.widthAnchor.constraint(equalToConstant: 48.0),
+            ratingView.heightAnchor.constraint(equalTo: ratingView.widthAnchor),
+            ratingView.centerXAnchor.constraint(equalTo: posterView.leadingAnchor, constant: 24.0 + 16.0),
+            ratingView.centerYAnchor.constraint(equalTo: posterView.bottomAnchor)
+        ])
+    }
+    
+    private func bindViewModel() {
+        let input = MovieDetailsViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asSignal()
+        )
+        
+        let output = viewModel.transform(
+            input
+        )
+        
+        output.poster
+            .drive(posterView.rx.image)
+            .disposed(by: disposeBag)
+        
+        output.title
+            .drive(titleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.year
+            .drive(yearLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.overview
+            .drive(overviewLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 }

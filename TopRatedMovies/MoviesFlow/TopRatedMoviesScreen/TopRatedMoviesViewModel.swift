@@ -21,7 +21,7 @@ final class TopRatedMoviesViewModel {
         let models: [TopRatedMovieModel]
     }
     
-    private let state = PublishRelay<State>()
+    private let stateRelay = PublishRelay<State>()
     
     init(
         _ moviesProvider: MoyaProvider<MoviesAPI>,
@@ -60,7 +60,7 @@ final class TopRatedMoviesViewModel {
         let itemsObservable = Observable
             .merge(viewWillAppearObservable, didPullCollectionViewObservable)
             .flatMap { [getTopRatedMovies] in getTopRatedMovies() }
-            .do(onNext: { [weak self] in self?.state.accept(.init(models: $0)) })
+            .do(onNext: { [weak self] in self?.stateRelay.accept(.init(models: $0)) })
             .map { domainModels -> [TopRatedMoviesCell.Model] in
                 domainModels.map { $0.cellModel() }
             }
@@ -80,7 +80,7 @@ final class TopRatedMoviesViewModel {
         
         let movieDetailsObservable = didSelectItemObservable
             .map { $0.item }
-            .withLatestFrom(state.asObservable()) { index, state in state.models[index] }
+            .withLatestFrom(stateRelay.asObservable()) { index, state in state.models[index] }
             .map { $0.id }
             .flatMapLatest { [getMovieDetails] id in
                 getMovieDetails(id: id)
