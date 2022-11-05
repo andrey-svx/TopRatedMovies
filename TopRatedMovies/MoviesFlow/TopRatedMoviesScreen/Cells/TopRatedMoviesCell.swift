@@ -87,8 +87,8 @@ final class TopRatedMoviesCell: UICollectionViewCell {
         return stack
     }()
     
-    private let ratingView: CircleRatingView = {
-        let ratingView = CircleRatingView()
+    private let ratingView: CircleRatingControl = {
+        let ratingView = CircleRatingControl()
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         return ratingView
     }()

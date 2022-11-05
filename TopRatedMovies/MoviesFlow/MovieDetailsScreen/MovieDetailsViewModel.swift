@@ -18,6 +18,7 @@ final class MovieDetailsViewModel {
     struct Input {
         
         let viewWillAppear: Signal<Void>
+        let ratingSelected: Signal<Void>
     }
     
     struct Output {
@@ -27,7 +28,7 @@ final class MovieDetailsViewModel {
         let year: Driver<String?>
         let overview: Driver<String?>
         let rating: Driver<Int?>
-//        let coordinate: Driver<TopRatedMoviesViewController.Output>
+        let coordinate: Driver<MovieDetailsViewController.Output>
     }
     
     init(_ model: MovieDetailsModel) {
@@ -62,12 +63,21 @@ final class MovieDetailsViewModel {
             .withLatestFrom(stateRelay.asObservable()) { (_, state) in state.percentAverage }
             .asDriver(onErrorJustReturn: nil)
         
+        let ratingSelectedObservable = input.ratingSelected
+            .asObservable()
+        
+        let coordinate = ratingSelectedObservable
+            .withLatestFrom(stateRelay.asObservable()) { (_, state) in state.id }
+            .map { MovieDetailsViewController.Output.rate($0) }
+            .asDriver(onErrorJustReturn: .error("Something went wrong"))
+        
         return Output(
             poster: poster,
             title: title,
             year: year,
             overview: overview,
-            rating: rating
+            rating: rating,
+            coordinate: coordinate
         )
     }
 }

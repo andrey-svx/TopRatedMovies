@@ -9,7 +9,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class MovieDetailsViewController: UIViewController {
+final class MovieDetailsViewController: UIViewController, Coordinatable {
+        
+    enum Output {
+        
+        case rate(Int)
+        case error(String)
+    }
+    
+    typealias T = Output
+    
+    var onCoordinated: ((Output) -> Void)?
     
     private let posterView: UIImageView = {
         let imageView = UIImageView()
@@ -48,8 +58,8 @@ final class MovieDetailsViewController: UIViewController {
         return label
     }()
     
-    private let ratingView: CircleRatingView = {
-        let ratingView = CircleRatingView()
+    private let ratingControl: CircleRatingControl = {
+        let ratingView = CircleRatingControl()
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         return ratingView
     }()
@@ -121,7 +131,7 @@ final class MovieDetailsViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "Movie Details"
         view.addSubview(mainStack)
-        view.addSubview(ratingView)
+        view.addSubview(ratingControl)
     }
     
     private func configureLayout() {
@@ -136,16 +146,17 @@ final class MovieDetailsViewController: UIViewController {
             mainStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -12.0),
             mainStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12.0),
             
-            ratingView.widthAnchor.constraint(equalToConstant: 48.0),
-            ratingView.heightAnchor.constraint(equalTo: ratingView.widthAnchor),
-            ratingView.centerXAnchor.constraint(equalTo: posterView.leadingAnchor, constant: 24.0 + 16.0),
-            ratingView.centerYAnchor.constraint(equalTo: posterView.bottomAnchor)
+            ratingControl.widthAnchor.constraint(equalToConstant: 48.0),
+            ratingControl.heightAnchor.constraint(equalTo: ratingControl.widthAnchor),
+            ratingControl.centerXAnchor.constraint(equalTo: posterView.leadingAnchor, constant: 24.0 + 16.0),
+            ratingControl.centerYAnchor.constraint(equalTo: posterView.bottomAnchor)
         ])
     }
     
     private func bindViewModel() {
         let input = MovieDetailsViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asSignal()
+            viewWillAppear: self.rx.viewWillAppear.asSignal(),
+            ratingSelected: ratingControl.rx.tap.asSignal()
         )
         
         let output = viewModel.transform(
@@ -169,7 +180,11 @@ final class MovieDetailsViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output.rating
-            .drive(ratingView.rx.rating)
+            .drive(ratingControl.rx.rating)
+            .disposed(by: disposeBag)
+        
+        output.coordinate
+            .drive(onNext: { [weak self] in self?.onCoordinated?($0) })
             .disposed(by: disposeBag)
     }
 }
