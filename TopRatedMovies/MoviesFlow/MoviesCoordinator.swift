@@ -35,12 +35,20 @@ final class MoviesCoordinator: Coordinator {
         viewController.onCoordinated = { [weak self ]signal in
             switch signal {
             case .rate(let id):
-                break
+                self?.showRateMovieScreen(id)
             case .error(let message):
                 self?.showErrorMessage(message)
             }
         }
         navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showRateMovieScreen(_ id: Int) {
+        let viewController = resolver.resolve(RateMovieViewController.self, argument: id)!
+        let transition = SlideTransition()
+        viewController.modalPresentationStyle = .custom
+        viewController.transitioningDelegate = transition
+        navigationController.topViewController?.present(viewController, animated: true, completion: nil)
     }
     
     private func showErrorMessage(_ message: String) {
