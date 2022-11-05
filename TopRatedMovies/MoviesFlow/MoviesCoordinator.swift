@@ -24,9 +24,14 @@ final class MoviesCoordinator: Coordinator {
             case .empty:
                 break
             case .details(let model):
-                break
+                self?.showMovieDetailsScreen(model)
             }
         }
         navigationController.viewControllers = [viewController]
+    }
+    
+    private func showMovieDetailsScreen(_ model: MovieDetailsModel) {
+        let viewController = resolver.resolve(MovieDetailsViewController.self, argument: model)!
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

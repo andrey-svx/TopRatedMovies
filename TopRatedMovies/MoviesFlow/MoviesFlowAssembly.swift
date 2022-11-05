@@ -24,5 +24,14 @@ final class MoviesFlowAssembly: Assembly {
         container.register(TopRatedMoviesViewModel.self) { _ in
             TopRatedMoviesViewModel(.instantiate(), .instantiate())
         }
+        
+        container.register(MovieDetailsViewController.self) { (resolver, model: MovieDetailsModel) in
+            let viewModel = resolver.resolve(MovieDetailsViewModel.self, argument: model)!
+            return MovieDetailsViewController(viewModel: viewModel)
+        }
+        
+        container.register(MovieDetailsViewModel.self) { (_, model: MovieDetailsModel) in
+            MovieDetailsViewModel(model)
+        }
     }
 }
