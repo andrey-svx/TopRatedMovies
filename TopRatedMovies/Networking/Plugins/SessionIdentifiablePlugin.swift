@@ -41,11 +41,13 @@ struct SessionIdentifiablePlugin: PluginType {
             name = "guest_session_id"
         }
         let item = URLQueryItem(name: name, value: sessionIdentifierClosure(sessionIdentifier))
-        components?.queryItems?.append(item)
+        var queryItems = components?.queryItems ?? []
+        queryItems.append(item)
+        components?.queryItems = queryItems
         
-        var request = request
-        request.url = components?.url
+        var modifiedRequest = request
+        modifiedRequest.url = components?.url
         
-        return request
+        return modifiedRequest
     }
 }
