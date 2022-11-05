@@ -42,15 +42,19 @@ extension SlideTransition: UIViewControllerAnimatedTransitioning {
             transitionContext.completeTransition(false)
             return
         }
+        
+        guard let transitionedViewController = transitionContext.viewController(forKey: isPresenting ? .to : .from) else {
+            transitionContext.completeTransition(false)
+            return
+        }
 
         let duration = transitionDuration(using: transitionContext)
         let containerView = transitionContext.containerView
 
         let bottomLeftCorner = CGPoint(x: .zero, y: containerView.bounds.height)
-        let size = CGSize(
-            width: containerView.bounds.width,
-            height: containerView.bounds.height / 2.0
-        )
+        let width = containerView.bounds.width
+        let height = containerView.bounds.height / 4.0
+        let size = CGSize(width: width, height: height)
             
         let offScreenFrame = CGRect(
             origin: bottomLeftCorner,

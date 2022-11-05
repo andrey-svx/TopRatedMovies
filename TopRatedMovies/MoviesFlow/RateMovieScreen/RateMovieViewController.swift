@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class RateMovieViewController: UIViewController {
     
@@ -23,6 +25,7 @@ final class RateMovieViewController: UIViewController {
         let slider = UISlider()
         slider.minimumValue = 0.0
         slider.maximumValue = 100.0
+        slider.tintColor = .systemRed
         return slider
     }()
     
@@ -44,12 +47,14 @@ final class RateMovieViewController: UIViewController {
             submitButton
         ])
         stack.axis = .vertical
-        stack.spacing = 16.0
+        stack.spacing = 12.0
         stack.distribution = .fill
         stack.alignment = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
+    private let disposeBag = DisposeBag()
     
     init(viewModel: RateMovieViewModel) {
         self.viewModel = viewModel
@@ -83,5 +88,19 @@ final class RateMovieViewController: UIViewController {
         ])
     }
     
-    private func bindViewModel() { }
+    private func bindViewModel() {
+        let input = RateMovieViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asSignal(),
+            ratingSelected: slider.rx.value.asSignal(onErrorJustReturn: 0.0),
+            submitTapped: submitButton.rx.tap.asSignal()
+        )
+        
+        let output = viewModel.transform(
+            input
+        )
+        
+        output.rating
+            .drive(ratingLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
 }
