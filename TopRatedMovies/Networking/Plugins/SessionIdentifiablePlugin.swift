@@ -19,9 +19,9 @@ protocol SessionIdentifiable: TargetType {
 
 struct SessionIdentifiablePlugin: PluginType {
     
-    private let sessionIdentifierClosure: (SessionIdentifier) -> String
+    private let sessionIdentifierClosure: (SessionIdentifier) -> String?
     
-    init(_ sessionIdentifierClosure: @escaping (SessionIdentifier) -> String) {
+    init(_ sessionIdentifierClosure: @escaping (SessionIdentifier) -> String?) {
         self.sessionIdentifierClosure = sessionIdentifierClosure
     }
     
