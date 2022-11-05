@@ -10,8 +10,16 @@ import RxSwift
 import RxCocoa
 
 final class RateMovieViewController: UIViewController {
-    
+        
     private let viewModel: RateMovieViewModel
+    
+    private lazy var transition: SlideTransition = {
+        let transition = SlideTransition()
+        transition.onDismissed = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
+        return transition
+    }()
     
     private let ratingLabel: UILabel = {
         let label = UILabel()
@@ -59,6 +67,8 @@ final class RateMovieViewController: UIViewController {
     init(viewModel: RateMovieViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.modalPresentationStyle = .custom
+        self.transitioningDelegate = transition
     }
     
     required init?(coder: NSCoder) {

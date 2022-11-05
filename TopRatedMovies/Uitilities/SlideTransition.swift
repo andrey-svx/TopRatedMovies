@@ -9,12 +9,21 @@ import UIKit
 
 final class SlideTransition: NSObject {
     
+    var onDismissed: (() -> Void)?
+    
     private var isPresenting = true
     
-    private let dimmingView: UIView = {
+    private lazy var dimmingView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(recognizer)
         return view
+    }()
+    
+    private lazy var recognizer: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        return recognizer
     }()
 }
     
@@ -39,11 +48,6 @@ extension SlideTransition: UIViewControllerAnimatedTransitioning {
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let animatedView = transitionContext.view(forKey: isPresenting ? .to : .from) else {
-            transitionContext.completeTransition(false)
-            return
-        }
-        
-        guard let transitionedViewController = transitionContext.viewController(forKey: isPresenting ? .to : .from) else {
             transitionContext.completeTransition(false)
             return
         }
@@ -93,5 +97,9 @@ extension SlideTransition: UIViewControllerAnimatedTransitioning {
                 transitionContext.completeTransition(true)
             }
         )
+    }
+    
+    @objc private func handleTap() {
+        onDismissed?()
     }
 }

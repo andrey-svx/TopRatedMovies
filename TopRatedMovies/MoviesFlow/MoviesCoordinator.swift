@@ -45,9 +45,10 @@ final class MoviesCoordinator: Coordinator {
     
     private func showRateMovieScreen(_ id: Int) {
         let viewController = resolver.resolve(RateMovieViewController.self, argument: id)!
-        let transition = SlideTransition()
-        viewController.modalPresentationStyle = .custom
-        viewController.transitioningDelegate = transition
+//        let transition = SlideTransition()
+//        transition.onDismissed = { viewController.dismiss(animated: true, completion: nil) }
+//        viewController.modalPresentationStyle = .custom
+//        viewController.transitioningDelegate = transition
         navigationController.topViewController?.present(viewController, animated: true, completion: nil)
     }
     
