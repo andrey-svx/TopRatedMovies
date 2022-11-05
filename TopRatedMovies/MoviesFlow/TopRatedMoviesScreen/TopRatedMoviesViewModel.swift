@@ -50,15 +50,16 @@ final class TopRatedMoviesViewModel {
     
     func transform(_ input: Input) -> Output {
         
-        let viewWillAppearObservable = input.viewWillAppear
+        let viewWillAppearFirstTimeObservable = input.viewWillAppear
             .asObservable()
+            .take(1)
             .share()
         
         let didPullCollectionViewObservable = input.didPullCollectionView
             .asObservable()
         
         let itemsObservable = Observable
-            .merge(viewWillAppearObservable, didPullCollectionViewObservable)
+            .merge(viewWillAppearFirstTimeObservable, didPullCollectionViewObservable)
             .flatMap { [getTopRatedMovies] in getTopRatedMovies() }
             .do(onNext: { [weak self] in self?.stateRelay.accept(.init(models: $0)) })
             .map { domainModels -> [TopRatedMoviesCell.Model] in
@@ -90,7 +91,7 @@ final class TopRatedMoviesViewModel {
         
         let isLoading = Observable
             .merge(
-                viewWillAppearObservable.map { _ in true },
+                viewWillAppearFirstTimeObservable.map { _ in true },
                 didSelectItemObservable.map { _ in true },
                 itemsObservable.map { _ in false },
                 movieDetailsObservable.map { _ in false }

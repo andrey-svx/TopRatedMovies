@@ -21,12 +21,12 @@ final class MovieDetailsViewModel {
     }
     
     struct Output {
-        
-//        let isLoading: Driver<Bool>
+
         let poster: Driver<UIImage?>
         let title: Driver<String?>
         let year: Driver<String?>
         let overview: Driver<String?>
+        let rating: Driver<Int?>
 //        let coordinate: Driver<TopRatedMoviesViewController.Output>
     }
     
@@ -58,11 +58,16 @@ final class MovieDetailsViewModel {
             .withLatestFrom(stateRelay.asObservable()) { (_, state) in state.overview }
             .asDriver(onErrorJustReturn: nil)
         
+        let rating = viewWillAppearObservable
+            .withLatestFrom(stateRelay.asObservable()) { (_, state) in state.percentAverage }
+            .asDriver(onErrorJustReturn: nil)
+        
         return Output(
             poster: poster,
             title: title,
             year: year,
-            overview: overview
+            overview: overview,
+            rating: rating
         )
     }
 }

@@ -75,7 +75,7 @@ extension TopRatedMoviesResponse.Result {
             return nil
         }
         
-        let percentAverage = Int(voteAverage * 10)
+        let percentAverage = Int((voteAverage * 10).rounded())
         return .init(
             id: id,
             poster: image,

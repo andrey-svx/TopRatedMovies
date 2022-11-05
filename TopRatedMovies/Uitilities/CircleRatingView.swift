@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class CircleRatingView: UIView {
     
-    var rating: Int = 0 {
+    var rating: Int? = 0 {
         didSet {            
-            ratingLabel.text = "\(rating)%"
+            ratingLabel.text = "\(rating ?? 0)%"
         }
     }
     
@@ -49,5 +51,15 @@ final class CircleRatingView: UIView {
         super.layoutSubviews()
         
         layer.cornerRadius = bounds.width / 2.0
+    }
+}
+
+
+extension Reactive where Base: CircleRatingView {
+    
+    var rating: Binder<Int?> {
+        Binder(base) { circleRatingView, value in
+            circleRatingView.rating = value
+        }
     }
 }

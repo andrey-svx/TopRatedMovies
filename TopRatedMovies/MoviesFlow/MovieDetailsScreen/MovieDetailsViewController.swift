@@ -42,6 +42,7 @@ final class MovieDetailsViewController: UIViewController {
     private let overviewLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 16.0, weight: .light)
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
@@ -128,7 +129,7 @@ final class MovieDetailsViewController: UIViewController {
             posterView.widthAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 1/2),
             posterView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/2),
             
-            bottomSpacer.heightAnchor.constraint(greaterThanOrEqualToConstant: 100.0),
+            bottomSpacer.heightAnchor.constraint(greaterThanOrEqualToConstant: 0.0),
             
             mainStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 12.0),
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12.0),
@@ -165,6 +166,10 @@ final class MovieDetailsViewController: UIViewController {
         
         output.overview
             .drive(overviewLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.rating
+            .drive(ratingView.rx.rating)
             .disposed(by: disposeBag)
     }
 }

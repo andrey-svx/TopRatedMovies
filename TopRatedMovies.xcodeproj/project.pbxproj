@@ -116,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				3143510129103CB000A311E2 /* TopRatedMoviesCell.swift */,
-				3127444B2911897A00E3F69D /* CircleRatingView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -147,6 +146,7 @@
 		3143510C2910623300A311E2 /* Uitilities */ = {
 			isa = PBXGroup;
 			children = (
+				3127444B2911897A00E3F69D /* CircleRatingView.swift */,
 				318A8426290E67AA00A9B0D1 /* Coordinator.swift */,
 			);
 			path = Uitilities;
