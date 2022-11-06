@@ -14,8 +14,16 @@ struct SessionProvider {
         .just(KeychainWrapper.string(forKey: "session_id") != nil)
     }
     
-    func logout() -> Single<Void> {
+    func logout() {
+        KeychainWrapper.set(nil, forKey: "access_token")
         KeychainWrapper.set(nil, forKey: "session_id")
-        return .just(())
+    }
+    
+    func save(accessToken token: String) {
+        KeychainWrapper.set(token, forKey: "access_token")
+    }
+    
+    func save(sessionId id: String) {
+        KeychainWrapper.set(id, forKey: "session_id")
     }
 }

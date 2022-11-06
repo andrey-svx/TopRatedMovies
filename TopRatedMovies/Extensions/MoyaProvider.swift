@@ -13,21 +13,11 @@ extension MoyaProvider {
     static func instantiate() -> MoyaProvider<Target> {
         let plugins: [PluginType] = [
             NetworkLoggerPlugin.default,
-            ApiKeyablePlugin { APIConfigProvider.shared.apiKey },
-            SessionIdentifiablePlugin { _ in nil }
+            ApiKeyablePlugin({ APIConfigProvider.shared.apiKey }),
+            SessionIdentifiablePlugin({ _ in KeychainWrapper.string(forKey: "session_id") }),
+            AccessTokenPlugin(tokenClosure: { _ in KeychainWrapper.string(forKey: "access_token") ?? "" })
         ]
         let provider: MoyaProvider<Target> = .init(plugins: plugins)
         return provider
     }
-    
-    static func instantiate(
-        _ prepareClosure: @escaping (_ request: URLRequest, _ target: Target) -> URLRequest,
-        _ didReceiveClosure: @escaping (_ result: Result<Response, MoyaError>, _ target: Target) -> Void
-    ) -> MoyaProvider<Target> {
-        let plugins: [PluginType] = [
-            CustomPlugin(prepareClosure, didReceiveClosure)
-        ]
-        return .init(plugins: plugins)
-    }
-    
 }

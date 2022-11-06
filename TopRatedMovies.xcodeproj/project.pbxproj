@@ -55,6 +55,7 @@
 		31ABF2792917E6A80037BF71 /* AccountInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2782917E6A80037BF71 /* AccountInfoViewModel.swift */; };
 		31ABF27B2917F1430037BF71 /* SessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27A2917F1430037BF71 /* SessionProvider.swift */; };
 		31ABF27D2917F31A0037BF71 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27C2917F31A0037BF71 /* KeychainWrapper.swift */; };
+		31ABF28029180C8B0037BF71 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27F29180C8B0037BF71 /* AuthAPI.swift */; };
 		31CA2A672911BB1600658D03 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A662911BB1600658D03 /* Moya */; };
 		31CA2A692911BB2200658D03 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A682911BB2200658D03 /* RxMoya */; };
 		31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */; };
@@ -108,6 +109,7 @@
 		31ABF2782917E6A80037BF71 /* AccountInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoViewModel.swift; sourceTree = "<group>"; };
 		31ABF27A2917F1430037BF71 /* SessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProvider.swift; sourceTree = "<group>"; };
 		31ABF27C2917F31A0037BF71 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		31ABF27F29180C8B0037BF71 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesResponse.swift; sourceTree = "<group>"; };
 		31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,10 +296,18 @@
 			children = (
 				31ABF2712917D1B80037BF71 /* AuthCoordinator.swift */,
 				31ABF2732917D1D00037BF71 /* AuthFlowAssembly.swift */,
+				31ABF27E2917F6040037BF71 /* AccountInfoScreen */,
+			);
+			path = AuthFlow;
+			sourceTree = "<group>";
+		};
+		31ABF27E2917F6040037BF71 /* AccountInfoScreen */ = {
+			isa = PBXGroup;
+			children = (
 				31ABF2762917E6770037BF71 /* AccountInfoViewController.swift */,
 				31ABF2782917E6A80037BF71 /* AccountInfoViewModel.swift */,
 			);
-			path = AuthFlow;
+			path = AccountInfoScreen;
 			sourceTree = "<group>";
 		};
 		31CA2A642911B94800658D03 /* Config */ = {
@@ -331,6 +341,7 @@
 			children = (
 				3112513F2911B19300027611 /* MoviesAPI.swift */,
 				31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */,
+				31ABF27F29180C8B0037BF71 /* AuthAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -443,6 +454,7 @@
 				314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */,
 				31ABF25D2916A38E0037BF71 /* MovieDetailsViewModel.swift in Sources */,
 				31ABF26B2917BF740037BF71 /* RateMovieUseCase.swift in Sources */,
+				31ABF28029180C8B0037BF71 /* AuthAPI.swift in Sources */,
 				31ABF2702917C1750037BF71 /* DashboardFlowAssembly.swift in Sources */,
 				318A8435290F0A0300A9B0D1 /* MoviesCoordinator.swift in Sources */,
 				317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */,
