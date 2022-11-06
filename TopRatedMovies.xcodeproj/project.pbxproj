@@ -49,6 +49,8 @@
 		31ABF26B2917BF740037BF71 /* RateMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF26A2917BF740037BF71 /* RateMovieUseCase.swift */; };
 		31ABF26D2917C1400037BF71 /* DashboardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF26C2917C1400037BF71 /* DashboardCoordinator.swift */; };
 		31ABF2702917C1750037BF71 /* DashboardFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF26F2917C1750037BF71 /* DashboardFlowAssembly.swift */; };
+		31ABF2722917D1B80037BF71 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2712917D1B80037BF71 /* AuthCoordinator.swift */; };
+		31ABF2742917D1D00037BF71 /* AuthFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2732917D1D00037BF71 /* AuthFlowAssembly.swift */; };
 		31CA2A672911BB1600658D03 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A662911BB1600658D03 /* Moya */; };
 		31CA2A692911BB2200658D03 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A682911BB2200658D03 /* RxMoya */; };
 		31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */; };
@@ -96,6 +98,8 @@
 		31ABF26A2917BF740037BF71 /* RateMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateMovieUseCase.swift; sourceTree = "<group>"; };
 		31ABF26C2917C1400037BF71 /* DashboardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardCoordinator.swift; sourceTree = "<group>"; };
 		31ABF26F2917C1750037BF71 /* DashboardFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFlowAssembly.swift; sourceTree = "<group>"; };
+		31ABF2712917D1B80037BF71 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		31ABF2732917D1D00037BF71 /* AuthFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlowAssembly.swift; sourceTree = "<group>"; };
 		31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesResponse.swift; sourceTree = "<group>"; };
 		31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,6 +208,7 @@
 				3143510D2910641100A311E2 /* AppFlow */,
 				31ABF26E2917C1450037BF71 /* DashboardFlow */,
 				318A8436290F0A1100A9B0D1 /* MoviesFlow */,
+				31ABF2752917D1D50037BF71 /* AuthFlow */,
 				31ABF2442914630B0037BF71 /* Domain */,
 				311251412911B19900027611 /* Networking */,
 				3143510C2910623300A311E2 /* Uitilities */,
@@ -272,6 +277,15 @@
 				31ABF26F2917C1750037BF71 /* DashboardFlowAssembly.swift */,
 			);
 			path = DashboardFlow;
+			sourceTree = "<group>";
+		};
+		31ABF2752917D1D50037BF71 /* AuthFlow */ = {
+			isa = PBXGroup;
+			children = (
+				31ABF2712917D1B80037BF71 /* AuthCoordinator.swift */,
+				31ABF2732917D1D00037BF71 /* AuthFlowAssembly.swift */,
+			);
+			path = AuthFlow;
 			sourceTree = "<group>";
 		};
 		31CA2A642911B94800658D03 /* Config */ = {
@@ -423,8 +437,10 @@
 				31ABF24E291584B60037BF71 /* MoyaProvider.swift in Sources */,
 				311251402911B19300027611 /* MoviesAPI.swift in Sources */,
 				3127444C2911897A00E3F69D /* CircleRatingControl.swift in Sources */,
+				31ABF2742917D1D00037BF71 /* AuthFlowAssembly.swift in Sources */,
 				31ABF243291462A90037BF71 /* TopRatedMovieModel.swift in Sources */,
 				31ABF2572915B52E0037BF71 /* MovieDetailsModel.swift in Sources */,
+				31ABF2722917D1B80037BF71 /* AuthCoordinator.swift in Sources */,
 				31ABF246291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift in Sources */,
 				31ABF25B2916A3710037BF71 /* MovieDetailsViewController.swift in Sources */,
 				317A55C2290E62D3007F1C31 /* SceneDelegate.swift in Sources */,
