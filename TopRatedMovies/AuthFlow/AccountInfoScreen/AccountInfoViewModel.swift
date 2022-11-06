@@ -60,12 +60,12 @@ final class AccountInfoViewModel {
             .share()
         
         let statusMessage: Driver<String?> = Observable.merge(
-            viewWillAppearObservable,
-            refreshTriggerObservable
-        )
-        .flatMap { [sessionProvider] in sessionProvider.isAuthorized() }
-        .map { $0 ? "You are logged-in" : "You are logged-out" }
-        .asDriver(onErrorJustReturn: nil)
+                viewWillAppearObservable,
+                refreshTriggerObservable
+            )
+            .flatMap { [sessionProvider] in sessionProvider.isAuthorized() }
+            .map { $0 ? "You are logged-in" : "You are logged-out" }
+            .asDriver(onErrorJustReturn: nil)
         
         let authButtonTitle: Driver<String?> = Observable.merge(
                 viewWillAppearObservable,
@@ -97,10 +97,10 @@ final class AccountInfoViewModel {
         let requestTokenCompleteObservable = requestTokenInitObservable
             .flatMapLatest { [createRequestToken] _ -> Single<String?> in
                 createRequestToken()
-                    .do(onSuccess: { [weak self] in
-                        self?.requestTokenRelay.accept($0)
-                    })
             }
+            .do(onNext: { [weak self] in
+                self?.requestTokenRelay.accept($0)
+            })
             .share()
         
         let coordinate = requestTokenCompleteObservable
@@ -128,19 +128,19 @@ final class AccountInfoViewModel {
         let createSessionCompleteObservable = createSessionInitObservable
             .flatMap { [createAccessToken] token -> Single<String?> in
                 createAccessToken(token: token)
-                    .do(onSuccess: { [weak self] in
-                        self?.sessionProvider.save(accessToken: $0)
-                    })
             }
+            .do(onNext: { [weak self] in
+                self?.sessionProvider.save(accessToken: $0)
+            })
             .compactMap { $0 }
             .flatMap { [createSession] token -> Single<String?> in
                 createSession(token: token)
-                    .do(onSuccess: { [weak self] in
-                        self?.sessionProvider.save(sessionId: $0)
-                        self?.requestTokenRelay.accept(nil)
-                        self?.refreshTrigger.accept(())
-                    })
             }
+            .do(onNext: { [weak self] in
+                self?.sessionProvider.save(sessionId: $0)
+                self?.requestTokenRelay.accept(nil)
+                self?.refreshTrigger.accept(())
+            })
             .map { _ in () }
             .share()
         
