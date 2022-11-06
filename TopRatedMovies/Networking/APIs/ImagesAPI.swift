@@ -17,7 +17,7 @@ enum ImagesAPI {
 extension ImagesAPI: TargetType {
     
     var baseURL: URL {
-        URL(string: APIConfigProvider.shared.imagesHost)!
+        URL(string: NetworkingConfigProvider.shared.imagesHost)!
     }
     
     var path: String {

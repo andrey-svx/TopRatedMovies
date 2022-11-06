@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 import Swinject
 
 final class AuthCoordinator: Coordinator {
@@ -18,9 +19,26 @@ final class AuthCoordinator: Coordinator {
     }
     
     override func start() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .white
-        viewController.navigationItem.title = "Authorization"
+        let viewController = resolver.resolve(AccountInfoViewController.self)!
+        viewController.onCoordinated = { [weak self, weak viewController] signal in
+            switch signal {
+            case .approve(let token):
+                self?.showApproveTokenScreen(token)
+            case .failure(let message):
+                viewController?.showError(message)
+            }
+        }
         navigationController.viewControllers = [viewController]
+    }
+    
+    private func showApproveTokenScreen(_ token: String) {
+        let urlString = "https://www.themoviedb.org/auth/access?request_token=\(token)"
+        let url = URL(string: urlString)!
+        let viewController = SFSafariViewController(url: url)
+        navigationController.topViewController?.present(
+            viewController,
+            animated: true,
+            completion: nil
+        )
     }
 }

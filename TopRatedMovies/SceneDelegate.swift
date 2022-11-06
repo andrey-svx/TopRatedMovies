@@ -16,7 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         AppFlowAssembly(),
         DashboardFlowAssembly(),
         MoviesFlowAssembly(),
-        AuthFlowAssembly()
+        AuthFlowAssembly(),
+        NetworkingAssembly()
     ])
     
     private var appCoordinator: AppCoordinator?

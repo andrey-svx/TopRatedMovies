@@ -18,7 +18,7 @@ enum MoviesAPI {
 extension MoviesAPI: TargetType {
     
     var baseURL: URL {
-        URL(string: APIConfigProvider.shared.mainHost)!
+        URL(string: NetworkingConfigProvider.shared.mainHost)!
     }
     
     var path: String {
@@ -57,8 +57,7 @@ extension MoviesAPI: TargetType {
             return .requestPlain
         case .rate(id: _, rating: let rating):
             let body = RateMovieRequestBody(value: rating)
-            let data = (try? JSONEncoder().encode(body)) ?? .init()
-            return .requestData(data)
+            return .requestJSONEncodable(body)
         }
     }
     

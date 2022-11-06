@@ -15,5 +15,16 @@ final class AuthFlowAssembly: Assembly {
         container.register(AuthCoordinator.self) { (resolver, navigationController: UINavigationController) in
             AuthCoordinator(navigationController, resolver: resolver)
         }
+        
+        container.register(AccountInfoViewController.self) { resolver in
+            let viewModel = resolver.resolve(AccountInfoViewModel.self)!
+            return AccountInfoViewController(viewModel: viewModel)
+        }
+        
+        container.register(AccountInfoViewModel.self) { resolver in
+            let sessionProvider = SessionProvider()
+            let authProvider = resolver.resolve(MoyaProvider<AuthAPI>.self)!
+            return AccountInfoViewModel(sessionProvider, authProvider)
+        }
     }
 }

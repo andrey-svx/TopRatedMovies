@@ -40,7 +40,7 @@ final class RateMovieViewController: UIViewController, Coordinatable {
     
     private let slider: UISlider = {
         let slider = UISlider()
-        slider.minimumValue = 0.0
+        slider.minimumValue = 5.0
         slider.maximumValue = 100.0
         slider.tintColor = .systemRed
         return slider

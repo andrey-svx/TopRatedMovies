@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		311251402911B19300027611 /* MoviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112513F2911B19300027611 /* MoviesAPI.swift */; };
-		311251432911B22E00027611 /* APIConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311251422911B22E00027611 /* APIConfigProvider.swift */; };
-		311251452911B24500027611 /* APIConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 311251442911B24500027611 /* APIConfig.plist */; };
+		311251432911B22E00027611 /* NetworkingConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311251422911B22E00027611 /* NetworkingConfigProvider.swift */; };
+		311251452911B24500027611 /* NetworkingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 311251442911B24500027611 /* NetworkingConfig.plist */; };
 		3127444C2911897A00E3F69D /* CircleRatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127444B2911897A00E3F69D /* CircleRatingControl.swift */; };
 		3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */; };
 		3143510229103CB000A311E2 /* TopRatedMoviesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3143510129103CB000A311E2 /* TopRatedMoviesCell.swift */; };
@@ -33,7 +33,7 @@
 		31ABF243291462A90037BF71 /* TopRatedMovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF242291462A90037BF71 /* TopRatedMovieModel.swift */; };
 		31ABF246291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF245291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift */; };
 		31ABF24C291580870037BF71 /* ApiKeyablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF24B291580870037BF71 /* ApiKeyablePlugin.swift */; };
-		31ABF24E291584B60037BF71 /* MoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF24D291584B60037BF71 /* MoyaProvider.swift */; };
+		31ABF24E291584B60037BF71 /* MoyaProvider+instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF24D291584B60037BF71 /* MoyaProvider+instantiate.swift */; };
 		31ABF25029158AB30037BF71 /* CustomPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF24F29158AB30037BF71 /* CustomPlugin.swift */; };
 		31ABF25329158FDD0037BF71 /* SessionIdentifiablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF25229158FDD0037BF71 /* SessionIdentifiablePlugin.swift */; };
 		31ABF2552915A7510037BF71 /* MovieDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2542915A7510037BF71 /* MovieDetailsResponse.swift */; };
@@ -51,6 +51,17 @@
 		31ABF2702917C1750037BF71 /* DashboardFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF26F2917C1750037BF71 /* DashboardFlowAssembly.swift */; };
 		31ABF2722917D1B80037BF71 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2712917D1B80037BF71 /* AuthCoordinator.swift */; };
 		31ABF2742917D1D00037BF71 /* AuthFlowAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2732917D1D00037BF71 /* AuthFlowAssembly.swift */; };
+		31ABF2772917E6770037BF71 /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2762917E6770037BF71 /* AccountInfoViewController.swift */; };
+		31ABF2792917E6A80037BF71 /* AccountInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2782917E6A80037BF71 /* AccountInfoViewModel.swift */; };
+		31ABF27B2917F1430037BF71 /* SessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27A2917F1430037BF71 /* SessionProvider.swift */; };
+		31ABF27D2917F31A0037BF71 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27C2917F31A0037BF71 /* KeychainWrapper.swift */; };
+		31ABF28029180C8B0037BF71 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27F29180C8B0037BF71 /* AuthAPI.swift */; };
+		31ABF282291820B90037BF71 /* CreateAccessTokenRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF281291820B90037BF71 /* CreateAccessTokenRequestBody.swift */; };
+		31ABF28429182D260037BF71 /* CreateSessionRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF28329182D260037BF71 /* CreateSessionRequestBody.swift */; };
+		31ABF286291847B60037BF71 /* CreateRequestTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF285291847B60037BF71 /* CreateRequestTokenUseCase.swift */; };
+		31ABF2882918494C0037BF71 /* CreateAccessTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2872918494C0037BF71 /* CreateAccessTokenUseCase.swift */; };
+		31ABF28A29184A450037BF71 /* CreateSessionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF28929184A450037BF71 /* CreateSessionUseCase.swift */; };
+		31ABF28C29184BB70037BF71 /* NetworkingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF28B29184BB70037BF71 /* NetworkingAssembly.swift */; };
 		31CA2A672911BB1600658D03 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A662911BB1600658D03 /* Moya */; };
 		31CA2A692911BB2200658D03 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A682911BB2200658D03 /* RxMoya */; };
 		31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */; };
@@ -59,8 +70,8 @@
 
 /* Begin PBXFileReference section */
 		3112513F2911B19300027611 /* MoviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPI.swift; sourceTree = "<group>"; };
-		311251422911B22E00027611 /* APIConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigProvider.swift; sourceTree = "<group>"; };
-		311251442911B24500027611 /* APIConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIConfig.plist; sourceTree = "<group>"; };
+		311251422911B22E00027611 /* NetworkingConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingConfigProvider.swift; sourceTree = "<group>"; };
+		311251442911B24500027611 /* NetworkingConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = NetworkingConfig.plist; sourceTree = "<group>"; };
 		3127444B2911897A00E3F69D /* CircleRatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleRatingControl.swift; sourceTree = "<group>"; };
 		314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesViewModel.swift; sourceTree = "<group>"; };
 		3143510129103CB000A311E2 /* TopRatedMoviesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesCell.swift; sourceTree = "<group>"; };
@@ -82,7 +93,7 @@
 		31ABF242291462A90037BF71 /* TopRatedMovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMovieModel.swift; sourceTree = "<group>"; };
 		31ABF245291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTopRatedMoviesUseCase.swift; sourceTree = "<group>"; };
 		31ABF24B291580870037BF71 /* ApiKeyablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyablePlugin.swift; sourceTree = "<group>"; };
-		31ABF24D291584B60037BF71 /* MoyaProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaProvider.swift; sourceTree = "<group>"; };
+		31ABF24D291584B60037BF71 /* MoyaProvider+instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+instantiate.swift"; sourceTree = "<group>"; };
 		31ABF24F29158AB30037BF71 /* CustomPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlugin.swift; sourceTree = "<group>"; };
 		31ABF25229158FDD0037BF71 /* SessionIdentifiablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionIdentifiablePlugin.swift; sourceTree = "<group>"; };
 		31ABF2542915A7510037BF71 /* MovieDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsResponse.swift; sourceTree = "<group>"; };
@@ -100,6 +111,17 @@
 		31ABF26F2917C1750037BF71 /* DashboardFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardFlowAssembly.swift; sourceTree = "<group>"; };
 		31ABF2712917D1B80037BF71 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		31ABF2732917D1D00037BF71 /* AuthFlowAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlowAssembly.swift; sourceTree = "<group>"; };
+		31ABF2762917E6770037BF71 /* AccountInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
+		31ABF2782917E6A80037BF71 /* AccountInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoViewModel.swift; sourceTree = "<group>"; };
+		31ABF27A2917F1430037BF71 /* SessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProvider.swift; sourceTree = "<group>"; };
+		31ABF27C2917F31A0037BF71 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		31ABF27F29180C8B0037BF71 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
+		31ABF281291820B90037BF71 /* CreateAccessTokenRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccessTokenRequestBody.swift; sourceTree = "<group>"; };
+		31ABF28329182D260037BF71 /* CreateSessionRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionRequestBody.swift; sourceTree = "<group>"; };
+		31ABF285291847B60037BF71 /* CreateRequestTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequestTokenUseCase.swift; sourceTree = "<group>"; };
+		31ABF2872918494C0037BF71 /* CreateAccessTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccessTokenUseCase.swift; sourceTree = "<group>"; };
+		31ABF28929184A450037BF71 /* CreateSessionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionUseCase.swift; sourceTree = "<group>"; };
+		31ABF28B29184BB70037BF71 /* NetworkingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingAssembly.swift; sourceTree = "<group>"; };
 		31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesResponse.swift; sourceTree = "<group>"; };
 		31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +146,8 @@
 		311251412911B19900027611 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				31ABF28B29184BB70037BF71 /* NetworkingAssembly.swift */,
+				31ABF24D291584B60037BF71 /* MoyaProvider+instantiate.swift */,
 				31CA2A642911B94800658D03 /* Config */,
 				31CA2A6C2911C27700658D03 /* DTOs */,
 				31CA2A6D2911C29400658D03 /* APIs */,
@@ -145,8 +169,7 @@
 			children = (
 				317A55C3290E62D3007F1C31 /* TopRatedMoviesViewController.swift */,
 				314350FF29103A3D00A311E2 /* TopRatedMoviesViewModel.swift */,
-				31ABF245291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift */,
-				31ABF2582915B5B30037BF71 /* GetMovieDetailsUseCase.swift */,
+				31ABF28F29184FB50037BF71 /* UseCases */,
 				3127444A2911895B00E3F69D /* Cells */,
 			);
 			path = TopRatedMoviesScreen;
@@ -159,7 +182,6 @@
 				314351062910470D00A311E2 /* UICollectionView.swift */,
 				314351032910446B00A311E2 /* UIViewController+Rx.swift */,
 				314351102910F3C800A311E2 /* UIRefreshControl+Rx.swift */,
-				31ABF24D291584B60037BF71 /* MoyaProvider.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -170,6 +192,8 @@
 				3127444B2911897A00E3F69D /* CircleRatingControl.swift */,
 				318A8426290E67AA00A9B0D1 /* Coordinator.swift */,
 				31ABF25F2916E8860037BF71 /* SlideTransition.swift */,
+				31ABF27A2917F1430037BF71 /* SessionProvider.swift */,
+				31ABF27C2917F31A0037BF71 /* KeychainWrapper.swift */,
 			);
 			path = Uitilities;
 			sourceTree = "<group>";
@@ -265,7 +289,7 @@
 			children = (
 				31ABF2612916EA800037BF71 /* RateMovieViewController.swift */,
 				31ABF2632916EA970037BF71 /* RateMovieViewModel.swift */,
-				31ABF26A2917BF740037BF71 /* RateMovieUseCase.swift */,
+				31ABF28E29184FA90037BF71 /* UseCases */,
 			);
 			path = RateMovieScreen;
 			sourceTree = "<group>";
@@ -284,15 +308,53 @@
 			children = (
 				31ABF2712917D1B80037BF71 /* AuthCoordinator.swift */,
 				31ABF2732917D1D00037BF71 /* AuthFlowAssembly.swift */,
+				31ABF27E2917F6040037BF71 /* AccountInfoScreen */,
 			);
 			path = AuthFlow;
+			sourceTree = "<group>";
+		};
+		31ABF27E2917F6040037BF71 /* AccountInfoScreen */ = {
+			isa = PBXGroup;
+			children = (
+				31ABF2762917E6770037BF71 /* AccountInfoViewController.swift */,
+				31ABF2782917E6A80037BF71 /* AccountInfoViewModel.swift */,
+				31ABF28D29184F9D0037BF71 /* UseCases */,
+			);
+			path = AccountInfoScreen;
+			sourceTree = "<group>";
+		};
+		31ABF28D29184F9D0037BF71 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				31ABF285291847B60037BF71 /* CreateRequestTokenUseCase.swift */,
+				31ABF2872918494C0037BF71 /* CreateAccessTokenUseCase.swift */,
+				31ABF28929184A450037BF71 /* CreateSessionUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		31ABF28E29184FA90037BF71 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				31ABF26A2917BF740037BF71 /* RateMovieUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		31ABF28F29184FB50037BF71 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				31ABF245291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift */,
+				31ABF2582915B5B30037BF71 /* GetMovieDetailsUseCase.swift */,
+			);
+			path = UseCases;
 			sourceTree = "<group>";
 		};
 		31CA2A642911B94800658D03 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				311251422911B22E00027611 /* APIConfigProvider.swift */,
-				311251442911B24500027611 /* APIConfig.plist */,
+				311251422911B22E00027611 /* NetworkingConfigProvider.swift */,
+				311251442911B24500027611 /* NetworkingConfig.plist */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -310,6 +372,8 @@
 				31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */,
 				31ABF2542915A7510037BF71 /* MovieDetailsResponse.swift */,
 				31ABF266291704D30037BF71 /* RateMovieRequestBody.swift */,
+				31ABF281291820B90037BF71 /* CreateAccessTokenRequestBody.swift */,
+				31ABF28329182D260037BF71 /* CreateSessionRequestBody.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -319,6 +383,7 @@
 			children = (
 				3112513F2911B19300027611 /* MoviesAPI.swift */,
 				31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */,
+				31ABF27F29180C8B0037BF71 /* AuthAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -395,7 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				317A55CC290E62D5007F1C31 /* LaunchScreen.storyboard in Resources */,
-				311251452911B24500027611 /* APIConfig.plist in Resources */,
+				311251452911B24500027611 /* NetworkingConfig.plist in Resources */,
 				317A55C9290E62D5007F1C31 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,7 +472,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31ABF282291820B90037BF71 /* CreateAccessTokenRequestBody.swift in Sources */,
 				314351072910470D00A311E2 /* UICollectionView.swift in Sources */,
+				31ABF28A29184A450037BF71 /* CreateSessionUseCase.swift in Sources */,
 				31ABF2592915B5B30037BF71 /* GetMovieDetailsUseCase.swift in Sources */,
 				318A8427290E67AA00A9B0D1 /* Coordinator.swift in Sources */,
 				31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */,
@@ -415,8 +482,11 @@
 				31ABF25329158FDD0037BF71 /* SessionIdentifiablePlugin.swift in Sources */,
 				3143510229103CB000A311E2 /* TopRatedMoviesCell.swift in Sources */,
 				317A55C4290E62D3007F1C31 /* TopRatedMoviesViewController.swift in Sources */,
+				31ABF2882918494C0037BF71 /* CreateAccessTokenUseCase.swift in Sources */,
 				31ABF2692917B45B0037BF71 /* UIViewController.swift in Sources */,
+				31ABF27B2917F1430037BF71 /* SessionProvider.swift in Sources */,
 				31ABF24C291580870037BF71 /* ApiKeyablePlugin.swift in Sources */,
+				31ABF2772917E6770037BF71 /* AccountInfoViewController.swift in Sources */,
 				318A842C290F01AE00A9B0D1 /* AppCoordinator.swift in Sources */,
 				31ABF2622916EA800037BF71 /* RateMovieViewController.swift in Sources */,
 				31ABF2642916EA970037BF71 /* RateMovieViewModel.swift in Sources */,
@@ -425,22 +495,28 @@
 				31ABF2552915A7510037BF71 /* MovieDetailsResponse.swift in Sources */,
 				31ABF267291704D30037BF71 /* RateMovieRequestBody.swift in Sources */,
 				3143510F2910648B00A311E2 /* MoviesFlowAssembly.swift in Sources */,
-				311251432911B22E00027611 /* APIConfigProvider.swift in Sources */,
+				311251432911B22E00027611 /* NetworkingConfigProvider.swift in Sources */,
+				31ABF28429182D260037BF71 /* CreateSessionRequestBody.swift in Sources */,
 				314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */,
 				31ABF25D2916A38E0037BF71 /* MovieDetailsViewModel.swift in Sources */,
 				31ABF26B2917BF740037BF71 /* RateMovieUseCase.swift in Sources */,
+				31ABF28029180C8B0037BF71 /* AuthAPI.swift in Sources */,
 				31ABF2702917C1750037BF71 /* DashboardFlowAssembly.swift in Sources */,
 				318A8435290F0A0300A9B0D1 /* MoviesCoordinator.swift in Sources */,
 				317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */,
 				3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */,
 				31ABF26D2917C1400037BF71 /* DashboardCoordinator.swift in Sources */,
-				31ABF24E291584B60037BF71 /* MoyaProvider.swift in Sources */,
+				31ABF286291847B60037BF71 /* CreateRequestTokenUseCase.swift in Sources */,
+				31ABF24E291584B60037BF71 /* MoyaProvider+instantiate.swift in Sources */,
 				311251402911B19300027611 /* MoviesAPI.swift in Sources */,
 				3127444C2911897A00E3F69D /* CircleRatingControl.swift in Sources */,
 				31ABF2742917D1D00037BF71 /* AuthFlowAssembly.swift in Sources */,
+				31ABF2792917E6A80037BF71 /* AccountInfoViewModel.swift in Sources */,
 				31ABF243291462A90037BF71 /* TopRatedMovieModel.swift in Sources */,
+				31ABF28C29184BB70037BF71 /* NetworkingAssembly.swift in Sources */,
 				31ABF2572915B52E0037BF71 /* MovieDetailsModel.swift in Sources */,
 				31ABF2722917D1B80037BF71 /* AuthCoordinator.swift in Sources */,
+				31ABF27D2917F31A0037BF71 /* KeychainWrapper.swift in Sources */,
 				31ABF246291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift in Sources */,
 				31ABF25B2916A3710037BF71 /* MovieDetailsViewController.swift in Sources */,
 				317A55C2290E62D3007F1C31 /* SceneDelegate.swift in Sources */,
