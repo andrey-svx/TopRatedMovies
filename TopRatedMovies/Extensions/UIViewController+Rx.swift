@@ -38,7 +38,9 @@ fileprivate extension UIViewController {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.tag = 1001
         spinner.startAnimating()
-        spinner.center = view.center
+        let x = view.bounds.size.width / 2.0
+        let y = view.bounds.size.height / 2.0
+        spinner.center = CGPoint(x: x, y: y)
         view.addSubview(spinner)
     }
 

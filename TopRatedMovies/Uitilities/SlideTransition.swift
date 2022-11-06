@@ -47,7 +47,9 @@ extension SlideTransition: UIViewControllerAnimatedTransitioning {
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let animatedView = transitionContext.view(forKey: isPresenting ? .to : .from) else {
+        guard let animatedView = transitionContext.view(
+            forKey: isPresenting ? .to : .from
+        ) else {
             transitionContext.completeTransition(false)
             return
         }
@@ -69,6 +71,10 @@ extension SlideTransition: UIViewControllerAnimatedTransitioning {
         let startFrame = isPresenting ? offScreenFrame : onScreenFrame
         let finalFrame = isPresenting ? onScreenFrame : offScreenFrame
 
+        animatedView.frame = startFrame
+        animatedView.layer.cornerRadius = 16.0
+        animatedView.clipsToBounds = true
+        
         if isPresenting {
             containerView.addSubview(dimmingView)
             dimmingView.frame = containerView.bounds
@@ -77,9 +83,6 @@ extension SlideTransition: UIViewControllerAnimatedTransitioning {
 
         dimmingView.alpha = isPresenting ? 0.0 : 0.5
 
-        animatedView.frame = startFrame
-        animatedView.layer.cornerRadius = 16.0
-        animatedView.clipsToBounds = true
 
         UIView.animate(
             withDuration: duration,
