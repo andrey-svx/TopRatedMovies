@@ -15,7 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private let assembler = Assembler([
         AppFlowAssembly(),
         DashboardFlowAssembly(),
-        MoviesFlowAssembly()
+        MoviesFlowAssembly(),
+        AuthFlowAssembly()
     ])
     
     private var appCoordinator: AppCoordinator?

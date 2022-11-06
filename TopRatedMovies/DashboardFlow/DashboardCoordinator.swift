@@ -19,25 +19,39 @@ final class DashboardCoordinator: Coordinator {
     
     override func start() {
         let viewController = UITabBarController()
+        viewController.viewControllers = [
+            instantiateMoviesCoordinator(),
+            instantiateAuthCoordinator()
+        ].map { $0.navigationController }
         navigationController.viewControllers = [viewController]
-        
-        let moviesNavigationController = UINavigationController()
+        childCoordinators.forEach { _, coordinator in coordinator.start() }
+    }
+    
+    private func instantiateMoviesCoordinator() -> MoviesCoordinator {
+        let navigationController = UINavigationController()
         let tabBarItem = UITabBarItem(
             title: "Movies",
             image: UIImage(systemName: "tv"),
             tag: 0
         )
-        moviesNavigationController.tabBarItem = tabBarItem
-        let moviesCoordinator = resolver.resolve(
-            MoviesCoordinator.self,
-            argument: moviesNavigationController
-        )!
-        retain(moviesCoordinator)
+        navigationController.tabBarItem = tabBarItem
+        let coordinator = resolver.resolve(MoviesCoordinator.self, argument: navigationController)!
+        retain(coordinator)
         
-        viewController.viewControllers = [
-            moviesCoordinator.navigationController
-        ]
+        return coordinator
+    }
+    
+    private func instantiateAuthCoordinator() -> AuthCoordinator {
+        let navigationController = UINavigationController()
+        let tabBarItem = UITabBarItem(
+            title: "Authorization",
+            image: UIImage(systemName: "person"),
+            tag: 0
+        )
+        navigationController.tabBarItem = tabBarItem
+        let coordinator = resolver.resolve(AuthCoordinator.self, argument: navigationController)!
+        retain(coordinator)
         
-        moviesCoordinator.start()
+        return coordinator
     }
 }
