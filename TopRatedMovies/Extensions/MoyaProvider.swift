@@ -14,7 +14,7 @@ extension MoyaProvider {
         let plugins: [PluginType] = [
             NetworkLoggerPlugin.default,
             ApiKeyablePlugin { APIConfigProvider.shared.apiKey },
-            SessionIdentifiablePlugin { _ in fatalError("Not implemented yet") }
+            SessionIdentifiablePlugin { _ in nil }
         ]
         let provider: MoyaProvider<Target> = .init(plugins: plugins)
         return provider

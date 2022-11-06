@@ -33,5 +33,14 @@ final class MoviesFlowAssembly: Assembly {
         container.register(MovieDetailsViewModel.self) { (_, model: MovieDetailsModel) in
             MovieDetailsViewModel(model)
         }
+        
+        container.register(RateMovieViewController.self) { (resolver, id: Int) in
+            let viewModel = resolver.resolve(RateMovieViewModel.self, argument: id)!
+            return RateMovieViewController(viewModel: viewModel)
+        }
+        
+        container.register(RateMovieViewModel.self) { (_, id: Int) in
+            RateMovieViewModel(id, .instantiate())
+        }
     }
 }
