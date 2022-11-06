@@ -31,6 +31,7 @@ final class AccountInfoViewModel {
         
         let authButtonTitle: Driver<String?>
         let authButtonImage: Driver<UIImage?>
+        let isLoading: Driver<Bool>
         let coordinate: Driver<AccountInfoViewController.Output>
         let ground: Driver<Void>
     }
@@ -72,9 +73,13 @@ final class AccountInfoViewModel {
             .asObservable()
             .share()
         
-        let coordinate = buttonTappedObservable
+        let requestTokenInitObservable = buttonTappedObservable
             .flatMap { [sessionProvider] in sessionProvider.isAuthorized() }
             .filter { !$0 }
+            .map { _ in () }
+            .share()
+        
+        let requestTokenCompleteObservable = requestTokenInitObservable
             .flatMapLatest { [authProvider] _ -> Single<String?> in
                 authProvider.rx.request(.createRequestToken, callbackQueue: .main)
                     .mapString(atKeyPath: "request_token")
@@ -84,6 +89,15 @@ final class AccountInfoViewModel {
                         self?.requestTokenRelay.accept($0)
                     })
             }
+            .share()
+        
+        let isLoading = Observable.merge(
+                requestTokenInitObservable.map { _ in true },
+                requestTokenCompleteObservable.map { _ in false }
+            )
+            .asDriver(onErrorJustReturn: false)
+        
+        let coordinate = requestTokenCompleteObservable
             .compactMap { $0 }
             .map { AccountInfoViewController.Output.approve($0) }
             .asDriver(onErrorJustReturn: .failure("Something went wrong"))
@@ -136,6 +150,7 @@ final class AccountInfoViewModel {
         return Output(
             authButtonTitle: authButtonTitle,
             authButtonImage: authButtonImage,
+            isLoading: isLoading,
             coordinate: coordinate,
             ground: ground
         )

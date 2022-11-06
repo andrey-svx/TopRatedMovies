@@ -100,6 +100,10 @@ final class AccountInfoViewController: UIViewController, Coordinatable {
             .drive(authButton.rx.image(for: .normal))
             .disposed(by: disposeBag)
         
+        output.isLoading
+            .drive(self.rx.isLoading)
+            .disposed(by: disposeBag)
+        
         output.coordinate
             .drive(onNext: { [weak self] in self?.onCoordinated?($0) })
             .disposed(by: disposeBag)

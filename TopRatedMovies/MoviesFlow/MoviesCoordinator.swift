@@ -32,7 +32,7 @@ final class MoviesCoordinator: Coordinator {
     
     private func showMovieDetailsScreen(_ model: MovieDetailsModel) {
         let viewController = resolver.resolve(MovieDetailsViewController.self, argument: model)!
-        viewController.onCoordinated = { [weak self, weak viewController] signal in
+        viewController.onCoordinated = { [weak self] signal in
             switch signal {
             case .rate(let id):
                 self?.showRateMovieScreen(id)
