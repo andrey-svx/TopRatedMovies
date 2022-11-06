@@ -14,6 +14,7 @@ final class MoviesCoordinator: Coordinator {
     
     init(_ navigationController: UINavigationController, resolver: Resolver) {
         self.resolver = resolver
+        
         super.init(navigationController)
     }
     

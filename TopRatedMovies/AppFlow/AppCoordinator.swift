@@ -18,6 +18,7 @@ final class AppCoordinator: Coordinator {
         self.resolver = resolver
         
         let navigationController = UINavigationController()
+        navigationController.isNavigationBarHidden = true
         super.init(navigationController)
     }
     
@@ -25,11 +26,11 @@ final class AppCoordinator: Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        let moviesCoordinator = resolver.resolve(
-            MoviesCoordinator.self,
+        let dashboardCoorinator = resolver.resolve(
+            DashboardCoordinator.self,
             argument: navigationController
         )!
-        retain(moviesCoordinator)
-        moviesCoordinator.start()
+        retain(dashboardCoorinator)
+        dashboardCoorinator.start()
     }
 }
