@@ -27,6 +27,8 @@ final class AuthFlowAssembly: Assembly {
                 switch target {
                 case .createRequestToken, .createAccessToken:
                     return APIConfigProvider.shared.initialAccessToken
+                case .createSession:
+                    return KeychainWrapper.string(forKey: "access_token") ?? ""
                 }
             }
             return AccountInfoViewModel(sessionProvider, authProvider)

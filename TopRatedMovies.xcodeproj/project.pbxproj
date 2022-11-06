@@ -57,6 +57,7 @@
 		31ABF27D2917F31A0037BF71 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27C2917F31A0037BF71 /* KeychainWrapper.swift */; };
 		31ABF28029180C8B0037BF71 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27F29180C8B0037BF71 /* AuthAPI.swift */; };
 		31ABF282291820B90037BF71 /* CreateAccessTokenRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF281291820B90037BF71 /* CreateAccessTokenRequestBody.swift */; };
+		31ABF28429182D260037BF71 /* CreateSessionRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF28329182D260037BF71 /* CreateSessionRequestBody.swift */; };
 		31CA2A672911BB1600658D03 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A662911BB1600658D03 /* Moya */; };
 		31CA2A692911BB2200658D03 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A682911BB2200658D03 /* RxMoya */; };
 		31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */; };
@@ -112,6 +113,7 @@
 		31ABF27C2917F31A0037BF71 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		31ABF27F29180C8B0037BF71 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		31ABF281291820B90037BF71 /* CreateAccessTokenRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccessTokenRequestBody.swift; sourceTree = "<group>"; };
+		31ABF28329182D260037BF71 /* CreateSessionRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionRequestBody.swift; sourceTree = "<group>"; };
 		31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesResponse.swift; sourceTree = "<group>"; };
 		31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -335,6 +337,7 @@
 				31ABF2542915A7510037BF71 /* MovieDetailsResponse.swift */,
 				31ABF266291704D30037BF71 /* RateMovieRequestBody.swift */,
 				31ABF281291820B90037BF71 /* CreateAccessTokenRequestBody.swift */,
+				31ABF28329182D260037BF71 /* CreateSessionRequestBody.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				31ABF267291704D30037BF71 /* RateMovieRequestBody.swift in Sources */,
 				3143510F2910648B00A311E2 /* MoviesFlowAssembly.swift in Sources */,
 				311251432911B22E00027611 /* APIConfigProvider.swift in Sources */,
+				31ABF28429182D260037BF71 /* CreateSessionRequestBody.swift in Sources */,
 				314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */,
 				31ABF25D2916A38E0037BF71 /* MovieDetailsViewModel.swift in Sources */,
 				31ABF26B2917BF740037BF71 /* RateMovieUseCase.swift in Sources */,
