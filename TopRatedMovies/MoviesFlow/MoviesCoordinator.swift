@@ -52,9 +52,7 @@ final class MoviesCoordinator: Coordinator {
             case .success:
                 viewController?.dismiss(animated: true, completion: nil)
             case .failure(let message):
-//                viewController?.showError(message)
-                viewController?.dismiss(animated: true, completion: nil)
-
+                viewController?.showError(message)
             }
         }
         navigationController.topViewController?.present(viewController, animated: true, completion: nil)

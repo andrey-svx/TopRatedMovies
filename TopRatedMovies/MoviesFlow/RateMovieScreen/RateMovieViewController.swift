@@ -109,6 +109,7 @@ final class RateMovieViewController: UIViewController, Coordinatable {
     
     private func bindViewModel() {
         let input = RateMovieViewModel.Input(
+            viewWillAppear: self.rx.viewWillAppear.asSignal(),
             ratingSelected: slider.rx.value.asSignal(onErrorJustReturn: 0.0),
             submitTapped: submitButton.rx.tap.asSignal()
         )
@@ -117,7 +118,11 @@ final class RateMovieViewController: UIViewController, Coordinatable {
             input
         )
         
-        output.rating
+        output.ratingValue
+            .drive(slider.rx.value)
+            .disposed(by: disposeBag)
+        
+        output.ratingLabel
             .drive(ratingLabel.rx.text)
             .disposed(by: disposeBag)
         

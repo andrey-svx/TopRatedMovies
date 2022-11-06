@@ -46,6 +46,7 @@
 		31ABF2642916EA970037BF71 /* RateMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2632916EA970037BF71 /* RateMovieViewModel.swift */; };
 		31ABF267291704D30037BF71 /* RateMovieRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF266291704D30037BF71 /* RateMovieRequestBody.swift */; };
 		31ABF2692917B45B0037BF71 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2682917B45B0037BF71 /* UIViewController.swift */; };
+		31ABF26B2917BF740037BF71 /* RateMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF26A2917BF740037BF71 /* RateMovieUseCase.swift */; };
 		31CA2A672911BB1600658D03 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A662911BB1600658D03 /* Moya */; };
 		31CA2A692911BB2200658D03 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A682911BB2200658D03 /* RxMoya */; };
 		31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */; };
@@ -90,6 +91,7 @@
 		31ABF2632916EA970037BF71 /* RateMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateMovieViewModel.swift; sourceTree = "<group>"; };
 		31ABF266291704D30037BF71 /* RateMovieRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateMovieRequestBody.swift; sourceTree = "<group>"; };
 		31ABF2682917B45B0037BF71 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		31ABF26A2917BF740037BF71 /* RateMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateMovieUseCase.swift; sourceTree = "<group>"; };
 		31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesResponse.swift; sourceTree = "<group>"; };
 		31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -253,6 +255,7 @@
 			children = (
 				31ABF2612916EA800037BF71 /* RateMovieViewController.swift */,
 				31ABF2632916EA970037BF71 /* RateMovieViewModel.swift */,
+				31ABF26A2917BF740037BF71 /* RateMovieUseCase.swift */,
 			);
 			path = RateMovieScreen;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				311251432911B22E00027611 /* APIConfigProvider.swift in Sources */,
 				314351042910446B00A311E2 /* UIViewController+Rx.swift in Sources */,
 				31ABF25D2916A38E0037BF71 /* MovieDetailsViewModel.swift in Sources */,
+				31ABF26B2917BF740037BF71 /* RateMovieUseCase.swift in Sources */,
 				318A8435290F0A0300A9B0D1 /* MoviesCoordinator.swift in Sources */,
 				317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */,
 				3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */,
