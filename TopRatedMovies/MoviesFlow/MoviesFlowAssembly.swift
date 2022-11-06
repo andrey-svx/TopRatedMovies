@@ -21,8 +21,13 @@ final class MoviesFlowAssembly: Assembly {
             return TopRatedMoviesViewController(viewModel: viewModel)
         }
         
-        container.register(TopRatedMoviesViewModel.self) { _ in
-            TopRatedMoviesViewModel(.instantiate(), .instantiate())
+        container.register(TopRatedMoviesViewModel.self) { resolver in
+            let moviesProvider = resolver.resolve(MoyaProvider<MoviesAPI>.self)!
+            let imagesProvider = resolver.resolve(MoyaProvider<ImagesAPI>.self)!
+            return TopRatedMoviesViewModel(
+                moviesProvider,
+                imagesProvider
+            )
         }
         
         container.register(MovieDetailsViewController.self) { (resolver, model: MovieDetailsModel) in
@@ -39,8 +44,9 @@ final class MoviesFlowAssembly: Assembly {
             return RateMovieViewController(viewModel: viewModel)
         }
         
-        container.register(RateMovieViewModel.self) { (_, id: Int) in
-            RateMovieViewModel(id, .instantiate())
+        container.register(RateMovieViewModel.self) { (resolver, id: Int) in
+            let moviesProvider = resolver.resolve(MoyaProvider<MoviesAPI>.self)!
+            return RateMovieViewModel(id, moviesProvider)
         }
     }
 }

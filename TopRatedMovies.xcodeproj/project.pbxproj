@@ -33,7 +33,7 @@
 		31ABF243291462A90037BF71 /* TopRatedMovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF242291462A90037BF71 /* TopRatedMovieModel.swift */; };
 		31ABF246291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF245291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift */; };
 		31ABF24C291580870037BF71 /* ApiKeyablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF24B291580870037BF71 /* ApiKeyablePlugin.swift */; };
-		31ABF24E291584B60037BF71 /* MoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF24D291584B60037BF71 /* MoyaProvider.swift */; };
+		31ABF24E291584B60037BF71 /* MoyaProvider+instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF24D291584B60037BF71 /* MoyaProvider+instantiate.swift */; };
 		31ABF25029158AB30037BF71 /* CustomPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF24F29158AB30037BF71 /* CustomPlugin.swift */; };
 		31ABF25329158FDD0037BF71 /* SessionIdentifiablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF25229158FDD0037BF71 /* SessionIdentifiablePlugin.swift */; };
 		31ABF2552915A7510037BF71 /* MovieDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2542915A7510037BF71 /* MovieDetailsResponse.swift */; };
@@ -61,6 +61,7 @@
 		31ABF286291847B60037BF71 /* CreateRequestTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF285291847B60037BF71 /* CreateRequestTokenUseCase.swift */; };
 		31ABF2882918494C0037BF71 /* CreateAccessTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2872918494C0037BF71 /* CreateAccessTokenUseCase.swift */; };
 		31ABF28A29184A450037BF71 /* CreateSessionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF28929184A450037BF71 /* CreateSessionUseCase.swift */; };
+		31ABF28C29184BB70037BF71 /* NetworkingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF28B29184BB70037BF71 /* NetworkingAssembly.swift */; };
 		31CA2A672911BB1600658D03 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A662911BB1600658D03 /* Moya */; };
 		31CA2A692911BB2200658D03 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A682911BB2200658D03 /* RxMoya */; };
 		31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */; };
@@ -92,7 +93,7 @@
 		31ABF242291462A90037BF71 /* TopRatedMovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMovieModel.swift; sourceTree = "<group>"; };
 		31ABF245291463DA0037BF71 /* GetTopRatedMoviesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTopRatedMoviesUseCase.swift; sourceTree = "<group>"; };
 		31ABF24B291580870037BF71 /* ApiKeyablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyablePlugin.swift; sourceTree = "<group>"; };
-		31ABF24D291584B60037BF71 /* MoyaProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaProvider.swift; sourceTree = "<group>"; };
+		31ABF24D291584B60037BF71 /* MoyaProvider+instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+instantiate.swift"; sourceTree = "<group>"; };
 		31ABF24F29158AB30037BF71 /* CustomPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlugin.swift; sourceTree = "<group>"; };
 		31ABF25229158FDD0037BF71 /* SessionIdentifiablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionIdentifiablePlugin.swift; sourceTree = "<group>"; };
 		31ABF2542915A7510037BF71 /* MovieDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsResponse.swift; sourceTree = "<group>"; };
@@ -120,6 +121,7 @@
 		31ABF285291847B60037BF71 /* CreateRequestTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequestTokenUseCase.swift; sourceTree = "<group>"; };
 		31ABF2872918494C0037BF71 /* CreateAccessTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccessTokenUseCase.swift; sourceTree = "<group>"; };
 		31ABF28929184A450037BF71 /* CreateSessionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionUseCase.swift; sourceTree = "<group>"; };
+		31ABF28B29184BB70037BF71 /* NetworkingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingAssembly.swift; sourceTree = "<group>"; };
 		31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesResponse.swift; sourceTree = "<group>"; };
 		31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +150,8 @@
 				31CA2A6C2911C27700658D03 /* DTOs */,
 				31CA2A6D2911C29400658D03 /* APIs */,
 				31ABF25129158AEC0037BF71 /* Plugins */,
+				31ABF24D291584B60037BF71 /* MoyaProvider+instantiate.swift */,
+				31ABF28B29184BB70037BF71 /* NetworkingAssembly.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -179,7 +183,6 @@
 				314351062910470D00A311E2 /* UICollectionView.swift */,
 				314351032910446B00A311E2 /* UIViewController+Rx.swift */,
 				314351102910F3C800A311E2 /* UIRefreshControl+Rx.swift */,
-				31ABF24D291584B60037BF71 /* MoyaProvider.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -480,12 +483,13 @@
 				3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */,
 				31ABF26D2917C1400037BF71 /* DashboardCoordinator.swift in Sources */,
 				31ABF286291847B60037BF71 /* CreateRequestTokenUseCase.swift in Sources */,
-				31ABF24E291584B60037BF71 /* MoyaProvider.swift in Sources */,
+				31ABF24E291584B60037BF71 /* MoyaProvider+instantiate.swift in Sources */,
 				311251402911B19300027611 /* MoviesAPI.swift in Sources */,
 				3127444C2911897A00E3F69D /* CircleRatingControl.swift in Sources */,
 				31ABF2742917D1D00037BF71 /* AuthFlowAssembly.swift in Sources */,
 				31ABF2792917E6A80037BF71 /* AccountInfoViewModel.swift in Sources */,
 				31ABF243291462A90037BF71 /* TopRatedMovieModel.swift in Sources */,
+				31ABF28C29184BB70037BF71 /* NetworkingAssembly.swift in Sources */,
 				31ABF2572915B52E0037BF71 /* MovieDetailsModel.swift in Sources */,
 				31ABF2722917D1B80037BF71 /* AuthCoordinator.swift in Sources */,
 				31ABF27D2917F31A0037BF71 /* KeychainWrapper.swift in Sources */,

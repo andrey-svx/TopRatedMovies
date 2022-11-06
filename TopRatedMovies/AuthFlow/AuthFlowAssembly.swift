@@ -21,16 +21,9 @@ final class AuthFlowAssembly: Assembly {
             return AccountInfoViewController(viewModel: viewModel)
         }
         
-        container.register(AccountInfoViewModel.self) { _ in
+        container.register(AccountInfoViewModel.self) { resolver in
             let sessionProvider = SessionProvider()
-            let authProvider = MoyaProvider<AuthAPI>.instantiate { target in
-                switch target {
-                case .createRequestToken, .createAccessToken:
-                    return APIConfigProvider.shared.initialAccessToken
-                case .createSession:
-                    return KeychainWrapper.string(forKey: "access_token") ?? ""
-                }
-            }
+            let authProvider = resolver.resolve(MoyaProvider<AuthAPI>.self)!
             return AccountInfoViewModel(sessionProvider, authProvider)
         }
     }
