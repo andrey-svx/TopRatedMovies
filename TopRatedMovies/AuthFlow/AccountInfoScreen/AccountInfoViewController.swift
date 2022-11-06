@@ -23,10 +23,9 @@ final class AccountInfoViewController: UIViewController, Coordinatable {
     
     private let viewModel: AccountInfoViewModel
     
-    private let rightSpacer: UIView = {
-        let view = UIView()
-        view.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        return view
+    private let statusLabel: UILabel = {
+        let label = UILabel()
+        return label
     }()
     
     private let authButton: UIButton = {
@@ -40,7 +39,7 @@ final class AccountInfoViewController: UIViewController, Coordinatable {
     
     private lazy var mainStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
-            rightSpacer,
+            statusLabel,
             authButton
         ])
         stack.axis = .horizontal
@@ -76,13 +75,14 @@ final class AccountInfoViewController: UIViewController, Coordinatable {
     private func configureLayout() {
         NSLayoutConstraint.activate([
             mainStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100.0),
+            mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60.0),
             mainStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40.0),
             mainStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40.0)
         ])
     }
     
     private func bindViewModel() {
+        
         let input = AccountInfoViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear.asSignal(),
             buttonTapped: authButton.rx.tap.asSignal()
@@ -91,6 +91,10 @@ final class AccountInfoViewController: UIViewController, Coordinatable {
         let output = viewModel.transform(
             input
         )
+        
+        output.statusMessage
+            .drive(statusLabel.rx.text)
+            .disposed(by: disposeBag)
         
         output.authButtonTitle
             .drive(authButton.rx.title(for: .normal))

@@ -29,6 +29,7 @@ final class AccountInfoViewModel {
     
     struct Output {
         
+        let statusMessage: Driver<String?>
         let authButtonTitle: Driver<String?>
         let authButtonImage: Driver<UIImage?>
         let isLoading: Driver<Bool>
@@ -51,6 +52,14 @@ final class AccountInfoViewModel {
         let refreshTriggerObservable = refreshTrigger
             .asObservable()
             .share()
+        
+        let statusMessage: Driver<String?> = Observable.merge(
+            viewWillAppearObservable,
+            refreshTriggerObservable
+        )
+        .flatMap { [sessionProvider] in sessionProvider.isAuthorized() }
+        .map { $0 ? "You are logged-in" : "You are logged-out" }
+        .asDriver(onErrorJustReturn: nil)
         
         let authButtonTitle: Driver<String?> = Observable.merge(
                 viewWillAppearObservable,
@@ -153,6 +162,7 @@ final class AccountInfoViewModel {
         .asDriver(onErrorJustReturn: ())
         
         return Output(
+            statusMessage: statusMessage,
             authButtonTitle: authButtonTitle,
             authButtonImage: authButtonImage,
             isLoading: isLoading,
