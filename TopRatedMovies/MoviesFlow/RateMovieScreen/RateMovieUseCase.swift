@@ -21,5 +21,6 @@ struct RateMovieUseCase {
     func callAsFunction(id: Int, rating: Float) -> Single<Bool> {
         provider.rx.request(.rate(id: id, rating: rating), callbackQueue: .main)
             .map(Bool.self, atKeyPath: "success")
+            .catch { _ in .just(false) }
     }
 }

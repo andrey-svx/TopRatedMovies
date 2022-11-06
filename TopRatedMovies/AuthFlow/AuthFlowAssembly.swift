@@ -22,7 +22,14 @@ final class AuthFlowAssembly: Assembly {
         }
         
         container.register(AccountInfoViewModel.self) { _ in
-            AccountInfoViewModel(.init())
+            let sessionProvider = SessionProvider()
+            let authProvider = MoyaProvider<AuthAPI>.instantiate { target in
+                switch target {
+                case .createRequestToken:
+                    return APIConfigProvider.shared.initialAccessToken
+                }
+            }
+            return AccountInfoViewModel(sessionProvider, authProvider)
         }
     }
 }

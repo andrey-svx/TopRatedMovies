@@ -9,7 +9,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class AccountInfoViewController: UIViewController {
+final class AccountInfoViewController: UIViewController, Coordinatable {
+
+    enum Output {
+        
+        case approve(String)
+        case failure(String)
+    }
+
+    typealias T = Output
+
+    var onCoordinated: ((Output) -> Void)?    
     
     private let viewModel: AccountInfoViewModel
     
@@ -88,6 +98,10 @@ final class AccountInfoViewController: UIViewController {
         
         output.authButtonImage
             .drive(authButton.rx.image(for: .normal))
+            .disposed(by: disposeBag)
+        
+        output.coordinate
+            .drive()
             .disposed(by: disposeBag)
     }
 }
