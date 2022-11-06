@@ -18,9 +18,7 @@ final class AuthCoordinator: Coordinator {
     }
     
     override func start() {
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .white
-        viewController.navigationItem.title = "Authorization"
+        let viewController = resolver.resolve(AccountInfoViewController.self)!
         navigationController.viewControllers = [viewController]
     }
 }
