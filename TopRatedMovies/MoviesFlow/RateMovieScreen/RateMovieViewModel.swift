@@ -63,7 +63,7 @@ final class RateMovieViewModel {
         
         let coordinateObservable = submitTappedObservable
             .flatMap { [rateMovie] (_, id, rating) in
-                rateMovie(id: id, rating: rating)
+                rateMovie(id: id, rating: rating.rounded())
             }
             .map { success -> RateMovieViewController.Output in
                 success ? .success : .failure("You need to get authorized to rate movie.")

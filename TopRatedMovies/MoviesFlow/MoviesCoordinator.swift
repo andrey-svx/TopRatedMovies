@@ -32,7 +32,7 @@ final class MoviesCoordinator: Coordinator {
     
     private func showMovieDetailsScreen(_ model: MovieDetailsModel) {
         let viewController = resolver.resolve(MovieDetailsViewController.self, argument: model)!
-        viewController.onCoordinated = { [weak self ] signal in
+        viewController.onCoordinated = { [weak self, weak viewController] signal in
             switch signal {
             case .rate(let id):
                 self?.showRateMovieScreen(id)
@@ -52,7 +52,9 @@ final class MoviesCoordinator: Coordinator {
             case .success:
                 viewController?.dismiss(animated: true, completion: nil)
             case .failure(let message):
-                viewController?.showError(message)
+                viewController?.showError(message) {
+                    viewController?.dismiss(animated: true, completion: nil)
+                }
             }
         }
         navigationController.topViewController?.present(viewController, animated: true, completion: nil)

@@ -9,7 +9,7 @@ import UIKit
 
 extension UIViewController {
     
-    func showError(_ message: String) {
+    func showError(_ message: String, completion: (() -> Void)? = nil) {
         let alertController = UIAlertController(
             title: "Error",
             message: message,
@@ -18,7 +18,7 @@ extension UIViewController {
         let action = UIAlertAction(
             title: "Clear",
             style: .default,
-            handler: nil
+            handler: { _ in completion?() }
         )
         alertController.addAction(action)
         
