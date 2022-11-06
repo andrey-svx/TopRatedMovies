@@ -21,7 +21,6 @@ final class AccountInfoViewModel {
     private let createAccessToken: CreateAccessTokenUseCase
     private let createSession: CreateSessionUseCase
 
-    private let isAuthorizedRelay = ReplayRelay<Bool>.create(bufferSize: 1)
     private let requestTokenRelay = ReplayRelay<String?>.create(bufferSize: 1)
     private let refreshTrigger = PublishRelay<Void>()
     
@@ -113,6 +112,8 @@ final class AccountInfoViewModel {
             .filter { $0 }
             .do(onNext: { [weak self] _ in
                 self?.sessionProvider.logout()
+            })
+            .do(onNext: { [weak self] _ in
                 self?.requestTokenRelay.accept(nil)
                 self?.refreshTrigger.accept(())
             })
@@ -138,6 +139,8 @@ final class AccountInfoViewModel {
             }
             .do(onNext: { [weak self] in
                 self?.sessionProvider.save(sessionId: $0)
+            })
+            .do(onNext: { [weak self] _ in
                 self?.requestTokenRelay.accept(nil)
                 self?.refreshTrigger.accept(())
             })
@@ -152,10 +155,7 @@ final class AccountInfoViewModel {
             )
             .asDriver(onErrorJustReturn: false)
         
-        let ground = Observable.merge(
-                logoutObservbale,
-                createSessionCompleteObservable
-            )
+        let ground = logoutObservbale
             .asDriver(onErrorJustReturn: ())
         
         return Output(
