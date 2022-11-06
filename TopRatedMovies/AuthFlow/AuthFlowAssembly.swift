@@ -22,7 +22,7 @@ final class AuthFlowAssembly: Assembly {
         }
         
         container.register(AccountInfoViewModel.self) { _ in
-            AccountInfoViewModel()
+            AccountInfoViewModel(.init())
         }
     }
 }

@@ -11,10 +11,11 @@ import RxSwift
 struct SessionProvider {
     
     func isAuthorized() -> Single<Bool> {
-        .just(true)
+        .just(KeychainWrapper.string(forKey: "session_id") != nil)
     }
     
     func logout() -> Single<Void> {
-        .just(())
+        KeychainWrapper.set(nil, forKey: "session_id")
+        return .just(())
     }
 }
