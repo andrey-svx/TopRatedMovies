@@ -57,8 +57,7 @@ extension MoviesAPI: TargetType {
             return .requestPlain
         case .rate(id: _, rating: let rating):
             let body = RateMovieRequestBody(value: rating)
-            let data = (try? JSONEncoder().encode(body)) ?? .init()
-            return .requestData(data)
+            return .requestJSONEncodable(body)
         }
     }
     
