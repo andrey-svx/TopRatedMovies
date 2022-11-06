@@ -18,7 +18,7 @@ enum AuthAPI {
 extension AuthAPI: TargetType {
     
     var baseURL: URL {
-        URL(string: APIConfigProvider.shared.mainHost)!
+        URL(string: NetworkingConfigProvider.shared.mainHost)!
     }
     
     var path: String {

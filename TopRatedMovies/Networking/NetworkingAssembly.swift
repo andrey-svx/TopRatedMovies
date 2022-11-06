@@ -24,7 +24,7 @@ final class NetworkingAssembly: Assembly {
             MoyaProvider<AuthAPI>.instantiate { target in
                 switch target {
                 case .createRequestToken, .createAccessToken:
-                    return APIConfigProvider.shared.initialAccessToken
+                    return NetworkingConfigProvider.shared.initialAccessToken
                 case .createSession:
                     return KeychainWrapper.string(forKey: "access_token") ?? ""
                 }

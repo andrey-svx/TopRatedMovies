@@ -13,7 +13,7 @@ extension MoyaProvider {
     static func instantiate() -> MoyaProvider<Target> {
         let plugins: [PluginType] = [
             NetworkLoggerPlugin.default,
-            ApiKeyablePlugin({ APIConfigProvider.shared.apiKey }),
+            ApiKeyablePlugin({ NetworkingConfigProvider.shared.apiKey }),
             SessionIdentifiablePlugin({ _ in KeychainWrapper.string(forKey: "session_id") }),
             AccessTokenPlugin(tokenClosure: { _ in KeychainWrapper.string(forKey: "access_token") ?? "" })
         ]
@@ -24,7 +24,7 @@ extension MoyaProvider {
     static func instantiate(tokenClosure: @escaping (Target) -> String) -> MoyaProvider<Target> {
         let plugins: [PluginType] = [
             NetworkLoggerPlugin.default,
-            ApiKeyablePlugin({ APIConfigProvider.shared.apiKey }),
+            ApiKeyablePlugin({ NetworkingConfigProvider.shared.apiKey }),
             SessionIdentifiablePlugin({ _ in KeychainWrapper.string(forKey: "session_id") }),
             AccessTokenPlugin(tokenClosure: { targetType in
                 guard let target = targetType as? Target else {
