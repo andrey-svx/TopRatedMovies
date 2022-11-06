@@ -11,11 +11,15 @@ import RxSwift
 import RxRelay
 import RxCocoa
 import Moya
+import RxMoya
 
 final class AccountInfoViewModel {
-    
+
     private let sessionProvider: SessionProvider
-    private let authProvider: MoyaProvider<AuthAPI>
+    
+    private let createRequestToken: CreateRequestTokenUseCase
+    private let createAccessToken: CreateAccessTokenUseCase
+    private let createSession: CreateSessionUseCase
 
     private let isAuthorizedRelay = ReplayRelay<Bool>.create(bufferSize: 1)
     private let requestTokenRelay = ReplayRelay<String?>.create(bufferSize: 1)
@@ -39,7 +43,9 @@ final class AccountInfoViewModel {
 
     init(_ sessionProvider: SessionProvider, _ authProvider: MoyaProvider<AuthAPI>) {
         self.sessionProvider = sessionProvider
-        self.authProvider = authProvider
+        self.createRequestToken = .init(authProvider)
+        self.createAccessToken = .init(authProvider)
+        self.createSession = .init(authProvider)
         self.requestTokenRelay.accept(nil)
     }
     
@@ -89,11 +95,8 @@ final class AccountInfoViewModel {
             .share()
         
         let requestTokenCompleteObservable = requestTokenInitObservable
-            .flatMapLatest { [authProvider] _ -> Single<String?> in
-                authProvider.rx.request(.createRequestToken, callbackQueue: .main)
-                    .mapString(atKeyPath: "request_token")
-                    .map { token -> String? in token }
-                    .catchAndReturn(nil)
+            .flatMapLatest { [createRequestToken] _ -> Single<String?> in
+                createRequestToken()
                     .do(onSuccess: { [weak self] in
                         self?.requestTokenRelay.accept($0)
                     })
@@ -123,21 +126,15 @@ final class AccountInfoViewModel {
             .share()
         
         let createSessionCompleteObservable = createSessionInitObservable
-            .flatMap { [authProvider] token -> Single<String?> in
-                authProvider.rx.request(.createAccessToken(token), callbackQueue: .main)
-                    .mapString(atKeyPath: "access_token")
-                    .map { token -> String? in token }
-                    .catchAndReturn(nil)
+            .flatMap { [createAccessToken] token -> Single<String?> in
+                createAccessToken(token: token)
                     .do(onSuccess: { [weak self] in
                         self?.sessionProvider.save(accessToken: $0)
                     })
             }
             .compactMap { $0 }
-            .flatMap { [authProvider] token -> Single<String?> in
-                authProvider.rx.request(.createSession(token), callbackQueue: .main)
-                    .mapString(atKeyPath: "session_id")
-                    .map { id -> String? in id }
-                    .catchAndReturn(nil)
+            .flatMap { [createSession] token -> Single<String?> in
+                createSession(token: token)
                     .do(onSuccess: { [weak self] in
                         self?.sessionProvider.save(sessionId: $0)
                         self?.requestTokenRelay.accept(nil)
@@ -156,10 +153,10 @@ final class AccountInfoViewModel {
             .asDriver(onErrorJustReturn: false)
         
         let ground = Observable.merge(
-            logoutObservbale,
-            createSessionCompleteObservable
-        )
-        .asDriver(onErrorJustReturn: ())
+                logoutObservbale,
+                createSessionCompleteObservable
+            )
+            .asDriver(onErrorJustReturn: ())
         
         return Output(
             statusMessage: statusMessage,

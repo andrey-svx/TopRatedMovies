@@ -58,6 +58,9 @@
 		31ABF28029180C8B0037BF71 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF27F29180C8B0037BF71 /* AuthAPI.swift */; };
 		31ABF282291820B90037BF71 /* CreateAccessTokenRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF281291820B90037BF71 /* CreateAccessTokenRequestBody.swift */; };
 		31ABF28429182D260037BF71 /* CreateSessionRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF28329182D260037BF71 /* CreateSessionRequestBody.swift */; };
+		31ABF286291847B60037BF71 /* CreateRequestTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF285291847B60037BF71 /* CreateRequestTokenUseCase.swift */; };
+		31ABF2882918494C0037BF71 /* CreateAccessTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF2872918494C0037BF71 /* CreateAccessTokenUseCase.swift */; };
+		31ABF28A29184A450037BF71 /* CreateSessionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ABF28929184A450037BF71 /* CreateSessionUseCase.swift */; };
 		31CA2A672911BB1600658D03 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A662911BB1600658D03 /* Moya */; };
 		31CA2A692911BB2200658D03 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 31CA2A682911BB2200658D03 /* RxMoya */; };
 		31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */; };
@@ -114,6 +117,9 @@
 		31ABF27F29180C8B0037BF71 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		31ABF281291820B90037BF71 /* CreateAccessTokenRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccessTokenRequestBody.swift; sourceTree = "<group>"; };
 		31ABF28329182D260037BF71 /* CreateSessionRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionRequestBody.swift; sourceTree = "<group>"; };
+		31ABF285291847B60037BF71 /* CreateRequestTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequestTokenUseCase.swift; sourceTree = "<group>"; };
+		31ABF2872918494C0037BF71 /* CreateAccessTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccessTokenUseCase.swift; sourceTree = "<group>"; };
+		31ABF28929184A450037BF71 /* CreateSessionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionUseCase.swift; sourceTree = "<group>"; };
 		31CA2A6A2911C27200658D03 /* TopRatedMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMoviesResponse.swift; sourceTree = "<group>"; };
 		31CA2A6E2912E55B00658D03 /* ImagesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -310,6 +316,9 @@
 			children = (
 				31ABF2762917E6770037BF71 /* AccountInfoViewController.swift */,
 				31ABF2782917E6A80037BF71 /* AccountInfoViewModel.swift */,
+				31ABF285291847B60037BF71 /* CreateRequestTokenUseCase.swift */,
+				31ABF2872918494C0037BF71 /* CreateAccessTokenUseCase.swift */,
+				31ABF28929184A450037BF71 /* CreateSessionUseCase.swift */,
 			);
 			path = AccountInfoScreen;
 			sourceTree = "<group>";
@@ -438,6 +447,7 @@
 			files = (
 				31ABF282291820B90037BF71 /* CreateAccessTokenRequestBody.swift in Sources */,
 				314351072910470D00A311E2 /* UICollectionView.swift in Sources */,
+				31ABF28A29184A450037BF71 /* CreateSessionUseCase.swift in Sources */,
 				31ABF2592915B5B30037BF71 /* GetMovieDetailsUseCase.swift in Sources */,
 				318A8427290E67AA00A9B0D1 /* Coordinator.swift in Sources */,
 				31CA2A6B2911C27200658D03 /* TopRatedMoviesResponse.swift in Sources */,
@@ -445,6 +455,7 @@
 				31ABF25329158FDD0037BF71 /* SessionIdentifiablePlugin.swift in Sources */,
 				3143510229103CB000A311E2 /* TopRatedMoviesCell.swift in Sources */,
 				317A55C4290E62D3007F1C31 /* TopRatedMoviesViewController.swift in Sources */,
+				31ABF2882918494C0037BF71 /* CreateAccessTokenUseCase.swift in Sources */,
 				31ABF2692917B45B0037BF71 /* UIViewController.swift in Sources */,
 				31ABF27B2917F1430037BF71 /* SessionProvider.swift in Sources */,
 				31ABF24C291580870037BF71 /* ApiKeyablePlugin.swift in Sources */,
@@ -468,6 +479,7 @@
 				317A55C0290E62D3007F1C31 /* AppDelegate.swift in Sources */,
 				3143510029103A3D00A311E2 /* TopRatedMoviesViewModel.swift in Sources */,
 				31ABF26D2917C1400037BF71 /* DashboardCoordinator.swift in Sources */,
+				31ABF286291847B60037BF71 /* CreateRequestTokenUseCase.swift in Sources */,
 				31ABF24E291584B60037BF71 /* MoyaProvider.swift in Sources */,
 				311251402911B19300027611 /* MoviesAPI.swift in Sources */,
 				3127444C2911897A00E3F69D /* CircleRatingControl.swift in Sources */,
