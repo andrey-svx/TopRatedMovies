@@ -91,12 +91,6 @@ final class AccountInfoViewModel {
             }
             .share()
         
-        let isLoading = Observable.merge(
-                requestTokenInitObservable.map { _ in true },
-                requestTokenCompleteObservable.map { _ in false }
-            )
-            .asDriver(onErrorJustReturn: false)
-        
         let coordinate = requestTokenCompleteObservable
             .compactMap { $0 }
             .map { AccountInfoViewController.Output.approve($0) }
@@ -112,11 +106,14 @@ final class AccountInfoViewModel {
             })
             .map { _ in () }
         
-        let createSessionObservable = viewWillAppearObservable
+        let createSessionInitObservable = viewWillAppearObservable
             .withLatestFrom(requestTokenRelay.asObservable()) { (_, token) in
                 token
             }
             .compactMap { $0 }
+            .share()
+        
+        let createSessionCompleteObservable = createSessionInitObservable
             .flatMap { [authProvider] token -> Single<String?> in
                 authProvider.rx.request(.createAccessToken(token), callbackQueue: .main)
                     .mapString(atKeyPath: "access_token")
@@ -141,9 +138,17 @@ final class AccountInfoViewModel {
             .map { _ in () }
             .share()
         
+        let isLoading = Observable.merge(
+                requestTokenInitObservable.map { _ in true },
+                createSessionInitObservable.map { _ in true },
+                requestTokenCompleteObservable.map { _ in false },
+                createSessionCompleteObservable.map { _ in false }
+            )
+            .asDriver(onErrorJustReturn: false)
+        
         let ground = Observable.merge(
             logoutObservbale,
-            createSessionObservable
+            createSessionCompleteObservable
         )
         .asDriver(onErrorJustReturn: ())
         
