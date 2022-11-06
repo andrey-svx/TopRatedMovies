@@ -11,6 +11,7 @@ import Moya
 enum AuthAPI {
     
     case createRequestToken
+    case createAccessToken(String)
 }
 
 extension AuthAPI: TargetType {
@@ -23,12 +24,16 @@ extension AuthAPI: TargetType {
         switch self {
         case .createRequestToken:
             return "/4/auth/request_token"
+        case .createAccessToken:
+            return "/4/auth/access_token"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .createRequestToken:
+            return .post
+        case .createAccessToken:
             return .post
         }
     }
@@ -37,6 +42,9 @@ extension AuthAPI: TargetType {
         switch self {
         case .createRequestToken:
             return .requestPlain
+        case .createAccessToken(let token):
+            let body = CreateAccessTokenRequestBody(requestToken: token)
+            return .requestJSONEncodable(body)
         }
     }
     

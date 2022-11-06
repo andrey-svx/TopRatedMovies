@@ -103,5 +103,9 @@ final class AccountInfoViewController: UIViewController, Coordinatable {
         output.coordinate
             .drive(onNext: { [weak self] in self?.onCoordinated?($0) })
             .disposed(by: disposeBag)
+        
+        output.ground
+            .drive()
+            .disposed(by: disposeBag)
     }
 }

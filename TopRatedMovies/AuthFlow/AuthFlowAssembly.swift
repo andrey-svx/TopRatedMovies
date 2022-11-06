@@ -25,7 +25,7 @@ final class AuthFlowAssembly: Assembly {
             let sessionProvider = SessionProvider()
             let authProvider = MoyaProvider<AuthAPI>.instantiate { target in
                 switch target {
-                case .createRequestToken:
+                case .createRequestToken, .createAccessToken:
                     return APIConfigProvider.shared.initialAccessToken
                 }
             }

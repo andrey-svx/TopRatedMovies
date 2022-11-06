@@ -19,11 +19,11 @@ struct SessionProvider {
         KeychainWrapper.set(nil, forKey: "session_id")
     }
     
-    func save(accessToken token: String) {
+    func save(accessToken token: String?) {
         KeychainWrapper.set(token, forKey: "access_token")
     }
     
-    func save(sessionId id: String) {
+    func save(sessionId id: String?) {
         KeychainWrapper.set(id, forKey: "session_id")
     }
 }
