@@ -20,5 +20,24 @@ final class DashboardCoordinator: Coordinator {
     override func start() {
         let viewController = UITabBarController()
         navigationController.viewControllers = [viewController]
+        
+        let moviesNavigationController = UINavigationController()
+        let tabBarItem = UITabBarItem(
+            title: "Movies",
+            image: UIImage(systemName: "tv"),
+            tag: 0
+        )
+        moviesNavigationController.tabBarItem = tabBarItem
+        let moviesCoordinator = resolver.resolve(
+            MoviesCoordinator.self,
+            argument: moviesNavigationController
+        )!
+        retain(moviesCoordinator)
+        
+        viewController.viewControllers = [
+            moviesCoordinator.navigationController
+        ]
+        
+        moviesCoordinator.start()
     }
 }
