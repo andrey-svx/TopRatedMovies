@@ -21,7 +21,6 @@ final class RateMovieViewModel {
     
     struct Input {
         
-        let viewWillAppear: Signal<Void>
         let ratingSelected: Signal<Float>
         let submitTapped: Signal<Void>
     }
@@ -29,7 +28,8 @@ final class RateMovieViewModel {
     struct Output {
 
         let rating: Driver<String?>
-//        let coordinate: Driver<MovieDetailsViewController.Output>
+        let isLoading: Driver<Bool>
+        let coordinate: Driver<RateMovieViewController.Output>
     }
     
     init(_ id: Int, _ moviesProvider: MoyaProvider<MoviesAPI>) {
@@ -46,8 +46,31 @@ final class RateMovieViewModel {
             .map { "\($0)%" }
             .asDriver(onErrorJustReturn: nil)
         
+        let submitTappedObservable = Observable
+            .combineLatest(
+                input.submitTapped.asObservable(),
+                idRelay.asObservable(),
+                ratingRelay.asObservable()
+            )
+            .share()
+        
+        let isLoading = Observable.merge(submitTappedObservable.map { _, _, _ in true })
+            .asDriver(onErrorJustReturn: false)
+        
+        let coordinate = submitTappedObservable
+            .flatMap { [moviesProvider] (_, id, rating) in
+                moviesProvider.rx.request(.rate(id: id, rating: rating), callbackQueue: .main)
+                    .map(Bool.self, atKeyPath: "success")
+            }
+            .map { success -> RateMovieViewController.Output in
+                success ? .success : .failure("Something went wrong")
+            }
+            .asDriver(onErrorJustReturn: .failure("Something went wrong"))
+        
         return Output(
-            rating: rating
+            rating: rating,
+            isLoading: isLoading,
+            coordinate: coordinate
         )
     }
 }

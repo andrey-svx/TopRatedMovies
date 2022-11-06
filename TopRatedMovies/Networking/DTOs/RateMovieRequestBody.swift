@@ -8,5 +8,5 @@
 import Foundation
 
 struct RateMovieRequestBody: Encodable {
-    let value: Double
+    let value: Float
 }

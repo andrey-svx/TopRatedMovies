@@ -12,7 +12,7 @@ enum MoviesAPI {
     
     case topRated
     case details(Int)
-    case rate(id: Int, rating: Double)
+    case rate(id: Int, rating: Float)
 }
 
 extension MoviesAPI: TargetType {

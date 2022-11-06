@@ -32,12 +32,14 @@ final class MoviesCoordinator: Coordinator {
     
     private func showMovieDetailsScreen(_ model: MovieDetailsModel) {
         let viewController = resolver.resolve(MovieDetailsViewController.self, argument: model)!
-        viewController.onCoordinated = { [weak self ]signal in
+        viewController.onCoordinated = { [weak self ] signal in
             switch signal {
             case .rate(let id):
                 self?.showRateMovieScreen(id)
             case .error(let message):
-                self?.showErrorMessage(message)
+                self?.navigationController.topViewController?.showError(
+                    message
+                )
             }
         }
         navigationController.pushViewController(viewController, animated: true)
@@ -45,29 +47,16 @@ final class MoviesCoordinator: Coordinator {
     
     private func showRateMovieScreen(_ id: Int) {
         let viewController = resolver.resolve(RateMovieViewController.self, argument: id)!
-//        let transition = SlideTransition()
-//        transition.onDismissed = { viewController.dismiss(animated: true, completion: nil) }
-//        viewController.modalPresentationStyle = .custom
-//        viewController.transitioningDelegate = transition
+        viewController.onCoordinated = { [weak viewController] signal in
+            switch signal {
+            case .success:
+                viewController?.dismiss(animated: true, completion: nil)
+            case .failure(let message):
+//                viewController?.showError(message)
+                viewController?.dismiss(animated: true, completion: nil)
+
+            }
+        }
         navigationController.topViewController?.present(viewController, animated: true, completion: nil)
-    }
-    
-    private func showErrorMessage(_ message: String) {
-        let alertController = UIAlertController(
-            title: "Error",
-            message: message,
-            preferredStyle: .alert
-        )
-        let action = UIAlertAction(
-            title: "Clear",
-            style: .default,
-            handler: nil
-        )
-        alertController.addAction(action)
-        navigationController.topViewController?.present(
-            alertController,
-            animated: true,
-            completion: nil
-        )
     }
 }

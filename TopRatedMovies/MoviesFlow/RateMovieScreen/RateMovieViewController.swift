@@ -9,7 +9,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class RateMovieViewController: UIViewController {
+final class RateMovieViewController: UIViewController, Coordinatable {
+    
+    enum Output {
+        
+        case success
+        case failure(String)
+    }
+    
+    typealias T = Output
+    
+    var onCoordinated: ((Output) -> Void)?
         
     private let viewModel: RateMovieViewModel
     
@@ -25,7 +35,6 @@ final class RateMovieViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24.0, weight: .semibold)
-        label.text = "58"
         return label
     }()
     
@@ -100,7 +109,6 @@ final class RateMovieViewController: UIViewController {
     
     private func bindViewModel() {
         let input = RateMovieViewModel.Input(
-            viewWillAppear: self.rx.viewWillAppear.asSignal(),
             ratingSelected: slider.rx.value.asSignal(onErrorJustReturn: 0.0),
             submitTapped: submitButton.rx.tap.asSignal()
         )
@@ -111,6 +119,14 @@ final class RateMovieViewController: UIViewController {
         
         output.rating
             .drive(ratingLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.isLoading
+            .drive(self.rx.isLoading)
+            .disposed(by: disposeBag)
+        
+        output.coordinate
+            .drive(onNext: { [weak self] in self?.onCoordinated?($0) })
             .disposed(by: disposeBag)
     }
 }
