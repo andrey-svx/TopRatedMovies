@@ -1,5 +1,5 @@
 # TopRatedMovies
-iOS app aimed to show my current coding skills. The app allows following capabilities: 
+iOS app aimed to show my current coding skills. The app allows user to: 
 - download first 10 top rated movies in Kazakhstan 
 - download selected movie detailed info
 - rate movie
