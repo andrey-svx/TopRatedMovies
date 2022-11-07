@@ -58,8 +58,10 @@ final class TopRatedMoviesViewModel {
         let didPullCollectionViewObservable = input.didPullCollectionView
             .asObservable()
         
-        let itemsObservable = Observable
-            .merge(viewWillAppearFirstTimeObservable, didPullCollectionViewObservable)
+        let itemsObservable = Observable.merge(
+                viewWillAppearFirstTimeObservable,
+                didPullCollectionViewObservable
+            )
             .flatMap { [getTopRatedMovies] in getTopRatedMovies() }
             .do(onNext: { [weak self] in self?.stateRelay.accept(.init(models: $0)) })
             .map { domainModels -> [TopRatedMoviesCell.Model] in
@@ -83,9 +85,7 @@ final class TopRatedMoviesViewModel {
             .map { $0.item }
             .withLatestFrom(stateRelay.asObservable()) { index, state in state.models[index] }
             .map { $0.id }
-            .flatMapLatest { [getMovieDetails] id in
-                getMovieDetails(id: id)
-            }
+            .flatMapLatest { [getMovieDetails] id in getMovieDetails(id: id) }
             .compactMap { $0 }
             .share()
         

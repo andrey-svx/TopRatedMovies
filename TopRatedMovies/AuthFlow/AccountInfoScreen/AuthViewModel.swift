@@ -13,7 +13,7 @@ import RxCocoa
 import Moya
 import RxMoya
 
-final class AccountInfoViewModel {
+final class AuthViewModel {
 
     private let sessionProvider: SessionProvider
     
@@ -36,7 +36,7 @@ final class AccountInfoViewModel {
         let authButtonTitle: Driver<String?>
         let authButtonImage: Driver<UIImage?>
         let isLoading: Driver<Bool>
-        let coordinate: Driver<AccountInfoViewController.Output>
+        let coordinate: Driver<AuthViewController.Output>
         let ground: Driver<Void>
     }
 
@@ -94,7 +94,9 @@ final class AccountInfoViewModel {
             .share()
         
         let requestTokenCompleteObservable = requestTokenInitObservable
-            .flatMapLatest { [createRequestToken] _ in createRequestToken() }
+            .flatMapLatest { [createRequestToken] _ -> Single<String?> in
+                createRequestToken()
+            }
             .do(onNext: { [weak self] in
                 self?.requestTokenRelay.accept($0)
             })
@@ -102,7 +104,7 @@ final class AccountInfoViewModel {
         
         let coordinate = requestTokenCompleteObservable
             .compactMap { $0 }
-            .map { AccountInfoViewController.Output.approve($0) }
+            .map { AuthViewController.Output.approve($0) }
             .asDriver(onErrorJustReturn: .failure("Something went wrong"))
         
         let logoutObservbale = buttonTappedObservable
@@ -118,17 +120,23 @@ final class AccountInfoViewModel {
             .map { _ in () }
         
         let createSessionInitObservable = viewWillAppearObservable
-            .withLatestFrom(requestTokenRelay.asObservable()) { (_, token) in token }
+            .withLatestFrom(requestTokenRelay.asObservable()) { (_, token) in
+                token
+            }
             .compactMap { $0 }
             .share()
         
         let createSessionCompleteObservable = createSessionInitObservable
-            .flatMap { [createAccessToken] token in createAccessToken(token: token) }
+            .flatMap { [createAccessToken] token -> Single<String?> in
+                createAccessToken(token: token)
+            }
             .do(onNext: { [weak self] in
                 self?.sessionProvider.save(accessToken: $0)
             })
             .compactMap { $0 }
-            .flatMap { [createSession] token in createSession(token: token) }
+            .flatMap { [createSession] token -> Single<String?> in
+                createSession(token: token)
+            }
             .do(onNext: { [weak self] in
                 self?.sessionProvider.save(sessionId: $0)
             })
